@@ -50,10 +50,10 @@
   <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
   <!-- my css file -->
-  <link href="assets/css/mystyle.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 
-  <link href="css/pe-icon-7-stroke.css" rel="stylesheet" />
-  <link href="css/ct-navbar.css" rel="stylesheet" />  
+  <!-- <link href="css/pe-icon-7-stroke.css" rel="stylesheet" /> -->
+  <!-- <link href="css/ct-navbar.css" rel="stylesheet" />   -->
 
   <!-- bootstrap socail icon css -->
   <link href="assets/css/bootstrap-social.css" rel="stylesheet">
@@ -66,302 +66,200 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <!-- the following is for the code block -->
-  <style>
-        .fa-heart{
-            color: #F74933;
-        }   
-        .space-100{
-            height: 100px;
-            display: block;
-        }
-        pre.prettyprint{
-            background-color: #ffffff;
-            border: 1px solid #999;
-            margin-top: 20px;
-            padding: 20px;
-            text-align: left;
-        }
-        .atv, .str{
-            color: #05AE0E;
-        }
-        .tag, .pln, .kwd{
-             color: #3472F7;
-        }
-        .atn{
-          color: #2C93FF;
-        }
-        .pln{
-           color: #333;
-        }
-        .com{
-            color: #999;
-        } 
-    </style>
 </head>
 
 <body>
-<div id="navbar-full">
-    <div id="navbar">
-        <nav class="navbar navbar-ct-purple navbar-fixed-top navbar-transparent" role="navigation">
-          
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand navbar-brand-logo" href="http://www.creative-tim.com">
-                    <div class="logo">
-                    <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
-                    </div>
-                    <div class="brand"> Creative Tim </div>
-              </a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="search" class="hidden-xs">
-                            <i class="pe-7s-search"></i>
-                            <p>Search</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="pe-7s-mail">
-                                <span class="label">23</span>
-                            </i>
-                            <p>Messages</p>
-                        </a>
-                    </li> 
-                    <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="pe-7s-user"></i>
-                                <p>Account</p>
-                            </a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                          </ul>
-                    </li>
-               </ul>
-               <form class="navbar-form navbar-right navbar-search-form" role="search">                  
-                 <div class="form-group">
-                      <input type="text" value="" class="form-control" placeholder="Search...">
-                 </div> 
-              </form>
-              
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-       <div class="blurred-container">
-            <div class="img-src" style="background-image: url('assets/img/odetocode.jpg')"></div>
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-purple navbar-fixed-top navbar-transparent coustmon-navbar" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="index.html" class="brand"><img src="assets/img/logo.png"></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+          <li><a href="doc/profile/index.html"><i class="fa fa-user"></i> Profile</a></li>
+          <li><a href="doc/code/index.html"><i class="fa fa-code"></i> Code</a></li>
+          <li><a href="doc/blog/index.html"><i class="fa fa-hashtag"></i> Blog</a></li>
+        </ul>
+        <!-- Button trigger modal -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle="modal" data-target="#myModal">
+          <span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Administrator Login</h4>
         </div>
-    </div><!--  end navbar -->
+        <div class="modal-body">
+          <form class="form-horizontal">
+              <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+              <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+          </div>
+          <button type="submit" class="btn btn-default">Sign in</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>          
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div> <!-- end menu-dropdown -->
-
-<div class="main">
-    <div class="container tim-container" style="max-width:800px; padding-top:100px">
-       <h1 class="text-center">Bootstrap Navigation Bar<br> With Icons<small class="subtitle">This item was made because of many requests of the users who <br>downloaded <a href="http://creative-tim.com/get-shit-done">Get Shit Done Kit.</a></small>
-       </h1>
-       <div class="col-md-12">
-       <br>
-        <h4>
-            We restyled the classic Bootstrap Navbar and we added brand new icons. If you want to add icons to the regular navbar you have to add to your project these files: 
-        </h4>   
-        <pre class="prettyprint">
-        <br>    
-              &lt;link href=&quot;css/bootstrap.css&quot; rel=&quot;stylesheet&quot; /&gt;
-              &lt;link href=&quot;css/pe-icon-7-stroke.css&quot; rel=&quot;stylesheet&quot; /&gt;
-              &lt;link href=&quot;css/ct-navbar.css&quot; rel=&quot;stylesheet&quot; /&gt;
-              
-              &lt;script src=&quot;js/jquery-1.10.2.js&quot;&gt;&lt;/script&gt;
-              &lt;script src=&quot;js/bootstrap.js&quot;&gt;&lt;/script&gt;
-              &lt;script src=&quot;js/ct-navbar.js&quot;&gt;&lt;/script&gt;
-        </pre>
-        <h4 class="text-danger">Important</h4><h5>Don't forget to add the font files('<b>Pe-icon7-stroke.eot</b>','<b>Pe-icon-7-stroke.svg</b>','<b>Pe-icon-7-stroke.ttf</b>','<b>Pe-icon-7-stroke.woff</b>') in "/Fonts/"</h5>
-         <h4>If you want to add the new icons to the navbar just change this code from your navbar:   
-            <pre class="prettyprint">
-            <br>
-                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Account&lt;/a&gt;&lt;/li&gt;
-            </pre>
-        
-        <h4>
-            With this one:
-        </h4>   
-         <pre class="prettyprint">
-         <br>
-                    &lt;li&gt;
-                        &lt;a href=&quot;#&quot;&gt;
-                            &lt;i class=&quot;pe-7s-user&quot;&gt;&lt;/i&gt;
-                            &lt;p&gt;Account&lt;/p&gt;
-                        &lt;/a&gt;
-                    &lt;/li&gt;
-            </pre>
-        
-        <h4>If you want to add a small badge, like the one that we have in our current navbar at "Messages" button, add this code:</h4>
-        <pre class="prettyprint">
-         <br>
-                    &lt;li&gt;
-                        &lt;a href=&quot;#&quot;&gt;
-                            &lt;i class=&quot;pe-7s-user&quot;&gt;
-                                &lt;span class=&quot;label&quot;&gt; 23 &lt;/span&gt;  
-                            &lt;/i&gt;
-                            &lt;p&gt;Account&lt;/p&gt;
-                        &lt;/a&gt;
-                    &lt;/li&gt;
-            </pre>
-             <h4>
-             
-            Besides the default navbar, we added 5 new colors: <b>blue</b>, <b>azzure</b>, <b>green</b>, <b>orange</b>, <b>red</b>. If you want to use one of them, you have to replace the 'navbar-default' with the class for the chosen color 'navbr-ct-{<b>color</b>}'.
-        </h4>        
-        
-<!-- navbar blue -->
-
-<div id="navbar-blue">
-    <nav class="navbar navbar-ct-blue" role="navigation">
+  <header>
+    <div class="profile-header text-center" style="background-image: url(assets/img/bg.jpg); ">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Brand</a>
+        <div class="container-inner">
+          <img class="img-circle avatar" src="assets/img/avatar.jpg">
+          <h3 class="profile-header-user">Michael Wang</h3>
+          <!-- <p class="profile-header-bio">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p> -->
         </div>
-    
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-global"></i>
-                        <p>Explore</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-mail">
-                            <span class="label">23</span>
-                        </i>
-                        <p>Messages</p>
-                    </a>
-                </li> 
-                <li>
-                      <a href="#">
-                            <i class="pe-7s-user"></i>
-                            <p>Account</p>
-                       </a>
-                </li>
-           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-</div><!--  end navbar -->
+      </div>
+    </div>
+  </header>
+  
 
-<!-- navbar azzure -->
-<div id="navbar-azzure">
-        <nav class="navbar navbar-ct-azzure" role="navigation">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Brand</a>
+    <div class="container">
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
             </div>
-        
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-global"></i>
-                        <p>Explore</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-mail">
-                            <span class="label">23</span>
-                        </i>
-                        <p>Messages</p>
-                    </a>
-                </li> 
-                <li>
-                      <a href="#">
-                            <i class="pe-7s-user"></i>
-                            <p>Account</p>
-                       </a>
-                </li>
-           </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-    
-    </div><!--  end navbar -->
-
-<!-- navbar green -->
-<div id="navbar-green">
-    <nav class="navbar navbar-ct-green" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Brand</a>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Uthappizza</h2>
+                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+                <p><a  href="#">More &raquo;</a></p>
+            </div>
         </div>
-    
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-global"></i>
-                        <p>Explore</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-mail">
-                            <span class="label">23</span>
-                        </i>
-                        <p>Messages</p>
-                    </a>
-                </li> 
-                <li>
-                      <a href="#">
-                            <i class="pe-7s-user"></i>
-                            <p>Account</p>
-                       </a>
-                </li>
-           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
 
-</div><!--  end navbar -->
 
-</div>
-<!-- end main -->
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3">
+                <p style="padding:20px;"></p>
+                <h3 align=center>This Month's Promotions</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <h2>Weekend Grand Buffet</h2>
+                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Meet our Culinary Specialists</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Alberto Somayya</h2>
+                <h4>Executive Chef</h4>
+                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Uthappizza</h2>
+                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+                <p><a  href="#">More &raquo;</a></p>
+            </div>
+        </div>
+
+
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3">
+                <p style="padding:20px;"></p>
+                <h3 align=center>This Month's Promotions</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <h2>Weekend Grand Buffet</h2>
+                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Meet our Culinary Specialists</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Alberto Somayya</h2>
+                <h4>Executive Chef</h4>
+                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Uthappizza</h2>
+                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+                <p><a  href="#">More &raquo;</a></p>
+            </div>
+        </div>
+
+
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3">
+                <p style="padding:20px;"></p>
+                <h3 align=center>This Month's Promotions</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <h2>Weekend Grand Buffet</h2>
+                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+
+        <div class="row row-content">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <p style="padding:20px;"></p>
+                <h3 align=center>Meet our Culinary Specialists</h3>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <h2>Alberto Somayya</h2>
+                <h4>Executive Chef</h4>
+                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
+                <p><a href="#">More &raquo;</a></p>
+            </div>
+        </div>
+    </div>
+  
+
+
+
 
 
 
@@ -384,7 +282,14 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-  <script src="js/ct-navbar.js"></script>
+  <script src="js/trans-navbar.js"></script>
+<!-- 
+  <script>
+    $('#loginModal').on('shown.bs.modal', function () {
+      $('#myInput').focus()
+    })
+  </script> -->
+
 </body>
 
 </html>
