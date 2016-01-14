@@ -44,20 +44,16 @@
 
   <!-- google font -->
   <!-- http://www.mrmcguire.com/10-useful-google-font-combinations-for-your-next-site/ -->
-  <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'> -->
 
   <!-- code block format -->
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <!-- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script> -->
 
   <!-- my css file -->
   <link href="css/style.css" rel="stylesheet">
 
-  <!-- <link href="css/pe-icon-7-stroke.css" rel="stylesheet" /> -->
-  <!-- <link href="css/ct-navbar.css" rel="stylesheet" />   -->
-
   <!-- bootstrap socail icon css -->
   <link href="assets/css/bootstrap-social.css" rel="stylesheet">
-  <!-- <script src="assets/js/dropdowns-enhancement.js"></script> -->
   
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,26 +80,39 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-          <li><a href="doc/profile/index.html"><i class="fa fa-user"></i> Profile</a></li>
-          <li><a href="doc/code/index.html"><i class="fa fa-code"></i> Code</a></li>
+          <li><a data-toggle="modal" data-target="#cvModal"><i class="fa fa-user"></i> Resume</a></li>
+          <li><a href="doc/code/index.html"><i class="fa fa-code"></i> Projects</a></li>
           <li><a href="doc/blog/index.html"><i class="fa fa-hashtag"></i> Blog</a></li>
         </ul>
         <!-- Button trigger modal -->
         <ul class="nav navbar-nav navbar-right">
-          <li><a data-toggle="modal" data-target="#myModal">
+          <li><a data-toggle="modal" data-target="#loginModal">
           <span class="glyphicon glyphicon-log-in"></span> Login</a>
           </li>
         </ul>
       </div>
   </nav>
+  <!-- Navigation bar Ends -->
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="cvModal" tabindex="-1" role="dialog" aria-labelledby="cvModalLabel">
+    <div class="modal-dialog modal-lg" role="documnet">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="cvModalLabel">Resume</h4>
+        </div>
+        <div class="modal-body">
+          <embed src="Resume.pdf" width="100%" height="550px;" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" internalinstanceid="8" title="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Administrator Login</h4>
+          <h4 class="modal-title" id="loginModalLabel">Administrator Login</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal">
@@ -123,17 +132,31 @@
       </div>
     </div>
   </div>
+  <!-- Modal Ends -->
+
+  <!-- Header -->
   <header>
     <div class="profile-header text-center" style="background-image: url('assets/img/bg.jpg')">
       <div class="container-fluid">
         <div class="container-inner">
           <img class="img-circle avatar" src="assets/img/avatar.jpg">
           <h3 class="profile-header-user">Michael Wang</h3>
-          <p class="profile-header-bio">Researcher @ Rayliant</p>
+          <p class="profile-header-bio">Quantitative Researcher @ Rayliant Global Advisors</p>
+          <ul class="social">
+            <!-- <li><a href="#"><i class="fa fa-facebook"></i></a></li> -->
+            <!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
+            <li><a href="https://www.linkedin.com/in/chenhuiwang"><i class="fa fa-linkedin-square"></i></a></li>
+            <li><a href="https://github.com/morningfin"><i class="fa fa-github-square"></i></a></li>
+            <!-- <li><a href="http://stackoverflow.com/users/5067954/nal-ra"><i class="fa fa-stack-overflow"></i></a></li> -->
+            <li><a href="https://plus.google.com/113993011297240245203"><i class="fa fa-google-plus-square "></i></a></li>
+            <!--<li><a href="#"><i class="fa fa-instagram"></i></a></li>-->
+            <!-- <li><a href="#"><i class="fa fa-skype"></i></a></li> -->
+          </ul>
         </div>
       </div>
     </div>
   </header>
+  <!-- Header Ends -->
   
 
     <div class="container">
