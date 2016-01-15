@@ -434,6 +434,39 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   display: block;
   margin: 8vh auto 15px;
 }
+.panel.announcements {
+  display: table;
+  table-layout: fixed;
+  height: 30vh;
+  min-height: 500px;
+  margin: 0 0 -100px 0;
+  width: 100%;
+  text-align: center;
+}
+.panel.announcements .content {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  padding-bottom: 150px;
+}
+.panel.announcements h1 {
+  font-size: 56px;
+}
+.panel.announcements h1 + p {
+  font-size: 28px;
+  font-weight: 100;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+.panel.announcements p.caption {
+  color: #525252;
+  font-size: 18px;
+}
+.panel.announcements .browser-window {
+  display: block;
+  margin: 8vh auto 15px;
+}
+
+
 .panel.features {
   padding: auto;
 }
@@ -538,6 +571,13 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
     .panel.statement h1 + p {
       font-size: 21px;
     }
+  .panel.announcements h1 {
+    font-size: 42px;
+    line-height: 1.2;
+  }
+    .panel.announcements h1 + p {
+      font-size: 21px;
+    }
   .panel.features .blocks .block .text {
     padding: 15px;
   }
@@ -548,6 +588,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
 
 @media (max-width: 620px) {
   .panel.statement .browser-window {
+    width: 100%;
+  }
+  .panel.announcements .browser-window {
     width: 100%;
   }
 }
@@ -604,6 +647,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
     border-radius: 50%;
     background-color: #fff;
   }
+  .browser-window .top-bar .top-bar-title {
+    margin: 1px 10px;
+    min-height: 90%;
+    display: inline-block;
+    border-radius: 0 0 4px 4px;
+  }
   .browser-window .circles,
   .terminal-window .circles {
     margin: 1px 10px;
@@ -644,5 +693,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
 }
 
 
-
-
+.announcement {
+  display: none;  /* Hide on load */
+}

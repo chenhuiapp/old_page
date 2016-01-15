@@ -55,6 +55,10 @@
 
   <!-- bootstrap socail icon css -->
   <link href="assets/css/bootstrap-social.css" rel="stylesheet">
+
+
+      <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -162,6 +166,139 @@
     </div>
   </header>
   <!-- Header Ends -->
+  
+  <section class="panel announcements light">
+    <h1>News</h1>
+    <div id='announcements'>
+  
+    <div class="announcement" id='announcement-0'>
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <ul class="pager">
+            <li class='announcement-btn-newer'>
+                <a>
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    newer
+                </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          
+<div class='browser-window'>
+      <div class='top-bar'>
+        <div class='circles'>
+          <div class="circle-red"></div>
+          <div class="circle-yellow"></div>
+          <div class="circle-green"></div>
+          <div class="top-bar-title">Wednesday, 01/13</div>
+        </div>
+      </div>
+      <div class='window-content'>
+        <pre class="line-numbers"><code class="language-php">
+Route::resource('photos', 'PhotoController');
+
+/**
+ * Retrieve A User...
+ */
+Route::get('/user/{user}', function(App\User $user)
+{
+  return $user;
+})
+
+return $that
+
+get the name
+
+  </code></pre>
+        </div>
+
+
+      </div>
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <ul class="pager">
+            <li class='announcement-btn-older'>
+                <a>
+                    older
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+        </div>
+      </div>
+
+    <div class="announcement" id='announcement-1'>
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <ul class="pager">
+            <li class='announcement-btn-newer'>
+                <a>
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    newer
+                </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          
+<div class='browser-window'>
+      <div class='top-bar'>
+        <div class='circles'>
+          <div class="circle-red"></div>
+          <div class="circle-yellow"></div>
+          <div class="circle-green"></div>
+          <div class="top-bar-title">Friday, 01/15</div>
+        </div>
+      </div>
+      <div class='window-content'>
+        <pre class="line-numbers"><code class="language-php">
+Route::resource('photos', 'PhotoController');
+
+/**
+ * Retrieve A User...
+ */
+Route::get('/user/{user}', function(App\User $user)
+{
+  return $user;
+})
+
+return $that
+
+get the name
+
+  </code></pre>
+        </div>
+
+
+      </div>
+
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <ul class="pager">
+            <li class='announcement-btn-older'>
+                <a>
+                    older
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+        </div>
+      </div>
+</div>
+  </section>
+
+
+
+
+
 
 
 <section class="panel features dark" id="features">
@@ -260,14 +397,6 @@ get the name
 
 
 
-
-
-
-
-
-
-
-
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
@@ -277,20 +406,64 @@ get the name
   <script src="js/prism.js"></script>
   <script src="js/viewport-units-buggyfill.js"></script>
   <script>window.viewportUnitsBuggyfill.init();</script>
-  <!-- <script>
-    var _gaq=[['_setAccount','UA-23865777-1'],['_trackPageview']];
-    (function(d,t){
-      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)
-    }(document,'script'));
-  </script> -->
-<!-- 
-  <script>
-    $('#loginModal').on('shown.bs.modal', function () {
-      $('#myInput').focus()
-    })
-  </script> -->
+
+
+
+
+
+
+<script>
+$(document).ready(function() {
+  // Adapted from http://cs61.org
+  var announcementIndex = 0;
+
+  function setAnnouncements(offset) {
+    var newIndex = announcementIndex  + offset;
+    var announcementNumber = $('.announcement').length;
+
+    if (newIndex < 0 || newIndex >= announcementNumber) {
+      return;
+    }
+
+    $('#announcement-' + announcementIndex).hide(0, function() {
+      $('#announcement-' + newIndex).show(0);
+    });
+
+    announcementIndex = newIndex;
+
+    if (announcementIndex >= announcementNumber - 1) {
+      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+        .addClass('disabled');
+    }
+    if (announcementIndex === 0) {
+      $('#announcement-' + announcementIndex + ' .announcement-btn-newer')
+        .addClass('disabled');
+    }
+  }
+  setAnnouncements(0);
+
+  $('.announcement-btn-newer > a').click(function() {
+    setAnnouncements(-1);
+  });
+  $('.announcement-btn-older > a').click(function() {
+    setAnnouncements(1);
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
