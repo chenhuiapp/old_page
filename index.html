@@ -85,13 +85,13 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-          <li><a data-toggle="modal" data-target="#cvModal"><i class="fa fa-user"></i> Resume</a></li>
+          <li><a data-toggle="modal" data-target="#cvModal" role="button"><i class="fa fa-user"></i> Resume</a></li>
           <li><a href="doc/code/index.html"><i class="fa fa-code"></i> Projects</a></li>
           <li><a href="doc/blog/index.html"><i class="fa fa-hashtag"></i> Blog</a></li>
         </ul>
         <!-- Button trigger modal -->
         <ul class="nav navbar-nav navbar-right">
-          <li><a data-toggle="modal" data-target="#loginModal">
+          <li><a data-toggle="modal" data-target="#loginModal" role="button">
           <span class="glyphicon glyphicon-log-in"></span> Login</a>
           </li>
         </ul>
@@ -170,32 +170,76 @@
   <section class="panel announcements light">
     <h1>News</h1>
     <div id='announcements'>
-  
-    <div class="announcement" id='announcement-0'>
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
-          <ul class="pager">
-            <li class='announcement-btn-newer'>
-                <a>
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    newer
-                </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-          
-<div class='browser-window'>
-      <div class='top-bar'>
-        <div class='circles'>
-          <div class="circle-red"></div>
-          <div class="circle-yellow"></div>
-          <div class="circle-green"></div>
-          <div class="top-bar-title">Wednesday, 01/13</div>
+      <div class="announcement" id='announcement-0'>
+        <ul class="pager">
+          <li class='announcement-btn-newer' role="button">
+            <a>
+              <i class="fa fa-angle-double-left"></i> Previous
+            </a>
+          </li>
+          <li class='announcement-btn-older' role="button">
+            <a>
+              Next <i class="fa fa-angle-double-right"></i>
+            </a>
+          </li>
+        </ul>
+        <div class='browser-window'>
+          <div class='top-bar'>
+            <div class='circles'>
+              <div class="circle-red"></div>
+              <div class="circle-yellow"></div>
+              <div class="circle-green"></div>
+              <div class="top-bar-title">Wednesday, 01/13</div>
+            </div>
+          </div>
+          <div class='window-content'>
+            <pre class="line-numbers"><code class="language-php">
+&lt;?php
+
+
+class Idea extends Eloquent {
+
+  /**
+   * Dreaming of something more?
+   *
+   * @with  Laravel
+   */
+   public function create()
+   {
+    // Have a fresh start...
+   }
+
+}
+
+            </code></pre>
+          </div>
         </div>
       </div>
-      <div class='window-content'>
-        <pre class="line-numbers"><code class="language-php">
+
+      <div class="announcement" id='announcement-1'>
+        <ul class="pager">
+          <li class='announcement-btn-newer' role="button">
+            <a>
+              <i class="fa fa-angle-double-left"></i> Previous
+            </a>
+          </li>
+          <li class='announcement-btn-older' role="button">
+            <a>
+              Next <i class="fa fa-angle-double-right"></i>
+            </a>
+          </li>
+        </ul>
+        <div class='browser-window'>
+          <div class='top-bar'>
+            <div class='circles'>
+              <div class="circle-red"></div>
+              <div class="circle-yellow"></div>
+              <div class="circle-green"></div>
+              <div class="top-bar-title">Friday, 01/15</div>
+            </div>
+          </div>
+          <div class='window-content'>
+            <pre class="line-numbers"><code class="language-php">
 Route::resource('photos', 'PhotoController');
 
 /**
@@ -210,93 +254,12 @@ return $that
 
 get the name
 
-  </code></pre>
+            </code></pre>
+          </div>
         </div>
-
-
       </div>
-
     </div>
-    <div class="col-xs-12 col-sm-3">
-      <ul class="pager">
-            <li class='announcement-btn-older'>
-                <a>
-                    older
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-        </div>
-      </div>
-
-    <div class="announcement" id='announcement-1'>
-      <div class="row">
-        <div class="col-xs-12 col-sm-3">
-          <ul class="pager">
-            <li class='announcement-btn-newer'>
-                <a>
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    newer
-                </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-          
-<div class='browser-window'>
-      <div class='top-bar'>
-        <div class='circles'>
-          <div class="circle-red"></div>
-          <div class="circle-yellow"></div>
-          <div class="circle-green"></div>
-          <div class="top-bar-title">Friday, 01/15</div>
-        </div>
-      </div>
-      <div class='window-content'>
-        <pre class="line-numbers"><code class="language-php">
-Route::resource('photos', 'PhotoController');
-
-/**
- * Retrieve A User...
- */
-Route::get('/user/{user}', function(App\User $user)
-{
-  return $user;
-})
-
-return $that
-
-get the name
-
-  </code></pre>
-        </div>
-
-
-      </div>
-
-    </div>
-    <div class="col-xs-12 col-sm-3">
-      <ul class="pager">
-            <li class='announcement-btn-older'>
-                <a>
-                    older
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-
-        </div>
-      </div>
-</div>
   </section>
-
-
-
 
 
 
@@ -339,7 +302,7 @@ get the name
       <div class="block even">
         <div class="text">
           <h2>Uthappizza</h2>
-          <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+          <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, <a href="#">Vidalia onion</a>, Guntur chillies and Buffalo Paneer.</p>
         </div>
         <div class="media">
           <div class="terminal-window">
