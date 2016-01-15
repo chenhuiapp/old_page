@@ -44,12 +44,13 @@
 
   <!-- google font -->
   <!-- http://www.mrmcguire.com/10-useful-google-font-combinations-for-your-next-site/ -->
-  <!-- <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'> -->
-
-  <!-- code block format -->
-  <!-- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script> -->
+  <link href="http://fonts.googleapis.com/css?family=Abel|Medula+One" rel="stylesheet" type="text/css" />
 
   <!-- my css file -->
+  <link href="css/style.css" rel="stylesheet">
+  <!-- prism css for code style -->
+  <link href="css/prism.css" rel="stylesheet">
+  <!-- normalize css file -->
   <link href="css/style.css" rel="stylesheet">
 
   <!-- bootstrap socail icon css -->
@@ -95,6 +96,7 @@
   <!-- Navigation bar Ends -->
 
   <!-- Modal -->
+  <!-- CV modal -->
   <div class="modal fade" id="cvModal" tabindex="-1" role="dialog" aria-labelledby="cvModalLabel">
     <div class="modal-dialog modal-lg" role="documnet">
       <div class="modal-content">
@@ -107,6 +109,8 @@
       </div>
     </div>
   </div>
+  <!-- CV modal Ends -->
+  <!-- Login modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
     <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
@@ -132,6 +136,7 @@
       </div>
     </div>
   </div>
+  <!-- Login modal Ends -->
   <!-- Modal Ends -->
 
   <!-- Header -->
@@ -157,137 +162,101 @@
     </div>
   </header>
   <!-- Header Ends -->
-  
 
-    <div class="container">
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Uthappizza</h2>
-                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
-                <p><a  href="#">More &raquo;</a></p>
-            </div>
+
+<section class="panel features dark" id="features">
+    <div class="blocks stacked">
+      <div class="block odd">
+        <div class="text text-justify">
+          <h2>About Me</h2>
+          <p>I am fascinated by asset pricing and trading algorithms. I enjoy thinking the financial markets using a mathematical mind. I regard myself as financial engineer, but I primarily see financial engineering as a means to make the market efficient.</p>
         </div>
-
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3">
-                <p style="padding:20px;"></p>
-                <h3 align=center>This Month's Promotions</h3>
+        <div class="media">
+          <div class='browser-window'>
+            <div class='top-bar'>
+              <div class='circles'>
+                <div class="circle circle-red"></div>
+                <div class="circle circle-yellow"></div>
+                <div class="circle circle-green"></div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-9">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
-                <p><a href="#">More &raquo;</a></p>
+            <div class='window-content'>
+              <pre class="line-numbers"><code class="language-cpp">class MichaelWang{
+  public:
+    MichaelWang();
+    ~MichaelWang();
+
+    char status = 'Quantitative Researcher @ Rayliant'
+    char website = 'http://morningfin.github.io/'
+    char email = 'cwang.michael.23@gmail.com'
+
+  private:
+    char interests = 'Asset Pricing, Portfolio Management'
+};
+</code></pre>
             </div>
+          </div>
+
         </div>
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Meet our Culinary Specialists</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Alberto Somayya</h2>
-                <h4>Executive Chef</h4>
-                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
-                <p><a href="#">More &raquo;</a></p>
-            </div>
+      </div><!-- /.block -->
+      <div class="block even">
+        <div class="text">
+          <h2>Uthappizza</h2>
+          <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
         </div>
+        <div class="media">
+          <div class="terminal-window">
+            <div class='top-bar'></div>
+            <div class='window-content'>
+              <div class="dark-code">
+              <pre><code class="language-bash">~/Apps $ php artisan make:migration create_users_table
+Migration created successfully!
+
+~/Apps $ php artisan migrate --seed
+Migrated: 2015_01_12_000000_create_users_table
+Migrated: 2015_01_12_100000_create_password_resets_table
+Migrated: 2015_01_13_162500_create_projects_table
+Migrated: 2015_01_13_162508_create_servers_table
+</code></pre></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.block -->
+      <div class="block odd">
+        <div class="text">
+          <h2>Weekend Grand Buffet</h2>
+          <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person.</p>
+        </div>
+        <div class="media">
+
+          <div class='browser-window'>
+            <div class='top-bar'>
+              <div class='circles'>
+                <div class="circle circle-red"></div>
+                <div class="circle circle-yellow"></div>
+                <div class="circle circle-green"></div>
+              </div>
+            </div>
+            <div class='window-content'>
+              <pre class="line-numbers"><code class="language-php">Route::resource('photos', 'PhotoController');
+
+/**
+ * Retrieve A User...
+ */
+Route::get('/user/{user}', function(App\User $user)
+{
+  return $user;
+})
+
+return $that
+
+get the name
+</code></pre>
+          </div>
+        </div>
+      </div><!-- /.block -->
     </div>
-
-    <div class="container">
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Uthappizza</h2>
-                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
-                <p><a  href="#">More &raquo;</a></p>
-            </div>
-        </div>
-
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3">
-                <p style="padding:20px;"></p>
-                <h3 align=center>This Month's Promotions</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
-                <p><a href="#">More &raquo;</a></p>
-            </div>
-        </div>
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Meet our Culinary Specialists</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Alberto Somayya</h2>
-                <h4>Executive Chef</h4>
-                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
-                <p><a href="#">More &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Our Lipsmacking Culinary Creations</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Uthappizza</h2>
-                <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
-                <p><a  href="#">More &raquo;</a></p>
-            </div>
-        </div>
-
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3">
-                <p style="padding:20px;"></p>
-                <h3 align=center>This Month's Promotions</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9">
-                <h2>Weekend Grand Buffet</h2>
-                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
-                <p><a href="#">More &raquo;</a></p>
-            </div>
-        </div>
-
-        <div class="row row-content">
-            <div class="col-xs-12 col-sm-3 col-sm-push-9">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Meet our Culinary Specialists</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-                <h2>Alberto Somayya</h2>
-                <h4>Executive Chef</h4>
-                <p>Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. </p>
-                <p><a href="#">More &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-  
-
-
-
-
-
-
-
-
-
+  </section>
 
 
 
@@ -305,6 +274,17 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
   <script src="js/trans-navbar.js"></script>
+  <script src="js/prism.js"></script>
+  <script src="js/viewport-units-buggyfill.js"></script>
+  <script>window.viewportUnitsBuggyfill.init();</script>
+  <!-- <script>
+    var _gaq=[['_setAccount','UA-23865777-1'],['_trackPageview']];
+    (function(d,t){
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)
+    }(document,'script'));
+  </script> -->
 <!-- 
   <script>
     $('#loginModal').on('shown.bs.modal', function () {

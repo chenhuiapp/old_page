@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 $(document).scroll(function() {
    if(hasTransparent){
-        if( $(this).scrollTop() > 420 ) {
+        if( $(this).scrollTop() > 240 ) {
             if(transparent) {
                 transparent = false;
                 $('nav[role="navigation"]').removeClass('navbar-transparent');
