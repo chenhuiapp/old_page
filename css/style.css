@@ -17,6 +17,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   background-repeat:no-repeat;
   background-size: cover;
   background-position: center center;
+  background-attachment: fixed;
   border: 0;
 }
 .profile-header .container-fluid {
@@ -30,7 +31,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   max-width: 540px;
   margin: 0 auto;
   margin-top: 100px;
-  /*position: fixed;*/
 }
 .profile-header .avatar {
   display: inline-block;
