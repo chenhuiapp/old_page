@@ -8,5 +8,5 @@ To access it, use http://morningfin.github.io
 
 # To Do
 
-- [ ] Fix News Background image Figure
-- [X] Let the header avatar fixed
+- [X] Fix News Background image Figure
+- [ ] Let the header avatar fixed
