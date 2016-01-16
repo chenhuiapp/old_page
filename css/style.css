@@ -449,7 +449,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   padding-bottom: 150px;
 }
 .panel.announcements h1 {
+  font-family: 'Cantarell', sans-serif;
   font-size: 56px;
+  font-weight: 400;
+  color: #6f5499; 
 }
 .panel.announcements h1 + p {
   font-size: 28px;
