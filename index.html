@@ -55,10 +55,6 @@
 
   <!-- bootstrap socail icon css -->
   <link href="assets/css/bootstrap-social.css" rel="stylesheet">
-
-
-      <script src="highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
   
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -145,7 +141,7 @@
 
   <!-- Header -->
   <header>
-    <div class="profile-header text-center" style="background-image: url('assets/img/bg.jpg')">
+    <div class="profile-header text-center" style="background-image: url('assets/img/bg.jpg');background-repeat: no-repeat; background-position: center center;"> <!-- background-attachment: fixed; -->
       <div class="container-fluid">
         <div class="container-inner">
           <img class="img-circle avatar" src="assets/img/avatar.jpg">
@@ -167,30 +163,28 @@
   </header>
   <!-- Header Ends -->
   
-  <section class="panel announcements light">
+  <section class="panel announcements light"  style="background-image: url('assets/img/g22299.png'); background-repeat: no-repeat; background-position: center center;">
     <h1>News</h1>
     <div id='announcements'>
       <div class="announcement" id='announcement-0'>
         <ul class="pager">
-          <li class='announcement-btn-newer' role="button">
-            <a>
-              <i class="fa fa-angle-double-left"></i> Previous
-            </a>
-          </li>
           <li class='announcement-btn-older' role="button">
             <a>
-              Next <i class="fa fa-angle-double-right"></i>
+              <i class="fa fa-angle-double-left"></i> Recent
+            </a>
+          </li>
+          <li class='announcement-btn-newer' role="button">
+            <a>
+              Previous <i class="fa fa-angle-double-right"></i>
             </a>
           </li>
         </ul>
         <div class='browser-window'>
           <div class='top-bar'>
-            <div class='circles'>
-              <div class="circle-red"></div>
-              <div class="circle-yellow"></div>
-              <div class="circle-green"></div>
-              <div class="top-bar-title">Wednesday, 01/13</div>
-            </div>
+            <i class="red"></i>
+            <i class="yellow"></i>
+            <i class="green"></i>
+            <span>Fri — 01/15/2016</span>
           </div>
           <div class='window-content'>
             <pre class="line-numbers"><code class="language-php">
@@ -218,25 +212,23 @@ class Idea extends Eloquent {
 
       <div class="announcement" id='announcement-1'>
         <ul class="pager">
-          <li class='announcement-btn-newer' role="button">
-            <a>
-              <i class="fa fa-angle-double-left"></i> Previous
-            </a>
-          </li>
           <li class='announcement-btn-older' role="button">
             <a>
-              Next <i class="fa fa-angle-double-right"></i>
+              <i class="fa fa-angle-double-left"></i> Recent
+            </a>
+          </li>
+          <li class='announcement-btn-newer' role="button">
+            <a>
+              Previous <i class="fa fa-angle-double-right"></i>
             </a>
           </li>
         </ul>
         <div class='browser-window'>
           <div class='top-bar'>
-            <div class='circles'>
-              <div class="circle-red"></div>
-              <div class="circle-yellow"></div>
-              <div class="circle-green"></div>
-              <div class="top-bar-title">Friday, 01/15</div>
-            </div>
+            <i class="red"></i>
+            <i class="yellow"></i>
+            <i class="green"></i>
+            <span>Wed - 01/13/2016</span>
           </div>
           <div class='window-content'>
             <pre class="line-numbers"><code class="language-php">
@@ -274,11 +266,10 @@ get the name
         <div class="media">
           <div class='browser-window'>
             <div class='top-bar'>
-              <div class='circles'>
-                <div class="circle circle-red"></div>
-                <div class="circle circle-yellow"></div>
-                <div class="circle circle-green"></div>
-              </div>
+              <i class="red"></i>
+              <i class="yellow"></i>
+              <i class="green"></i>
+              <span>About Me</span>
             </div>
             <div class='window-content'>
               <pre class="line-numbers"><code class="language-cpp">class MichaelWang{
@@ -332,9 +323,9 @@ Migrated: 2015_01_13_162508_create_servers_table
           <div class='browser-window'>
             <div class='top-bar'>
               <div class='circles'>
-                <div class="circle circle-red"></div>
-                <div class="circle circle-yellow"></div>
-                <div class="circle circle-green"></div>
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
               </div>
             </div>
             <div class='window-content'>
@@ -394,36 +385,31 @@ $(document).ready(function() {
 
     announcementIndex = newIndex;
 
-    if (announcementIndex >= announcementNumber - 1) {
+    if (announcementIndex == 0) {
       $('#announcement-' + announcementIndex + ' .announcement-btn-older')
-        .addClass('disabled');
+        .attr("data-toggle", "popover");
+      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+        .attr("data-placement", "left");
+      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+        .attr("data-content", "No more recent news.");
     }
-    if (announcementIndex === 0) {
+    if (announcementIndex >= announcementNumber - 1) {
       $('#announcement-' + announcementIndex + ' .announcement-btn-newer')
         .addClass('disabled');
     }
+    
   }
   setAnnouncements(0);
 
-  $('.announcement-btn-newer > a').click(function() {
+  $('.announcement-btn-older > a').click(function() {
     setAnnouncements(-1);
   });
-  $('.announcement-btn-older > a').click(function() {
+  $('.announcement-btn-newer > a').click(function() {
     setAnnouncements(1);
   });
+  $('[data-toggle="popover"]').popover();
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
