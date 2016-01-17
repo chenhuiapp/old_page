@@ -8,5 +8,7 @@ To access it, use http://morningfin.github.io
 
 # To Do
 
-- [X] Fix News Background image Figure
 - [ ] Let the header avatar fixed
+- [ ] Finish homepage footer
+- [ ] make resume modal responsive
+- [X] ~~Fix News Background image Figure~~
