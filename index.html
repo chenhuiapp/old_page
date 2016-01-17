@@ -105,7 +105,7 @@
           <h4 class="modal-title" id="cvModalLabel">Resume</h4>
         </div>
         <div class="modal-body">
-          <embed src="Resume.pdf" width="100%" height="550px;" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" internalinstanceid="8" title="">
+          <embed src="assets/Resume.pdf" width="100%" height="550px;" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" internalinstanceid="8" title="">
         </div>
       </div>
     </div>
@@ -188,9 +188,9 @@
             <span>Fri — 01/15/2016</span>
           </div>
           <div class='window-content'>
-            <pre class="line-numbers"><code class="language-bash">/Users/michaelwang $ ./news-1-15-16.cpp
-/Users/michaelwang $ I am now a Quantitative Researcher @ Rayliant Global Advisors
-/Users/michaelwang $ _
+            <pre class="line-numbers"><code class="language-bash">michaelwang $ ./news-1-15-16.cpp
+michaelwang $ I am now a Quantitative Researcher @ Rayliant Global Advisors
+michaelwang $ _
 
 
 
@@ -232,9 +232,9 @@
             <span>Wed - 01/13/2016</span>
           </div>
           <div class='window-content'>
-            <pre class="line-numbers"><code class="language-bash">/Users/michaelwang $ ./news-1-13-16.cpp
-/Users/michaelwang $ Hello World!
-/Users/michaelwang $ _
+            <pre class="line-numbers"><code class="language-bash">michaelwang $ ./news-1-13-16.cpp
+michaelwang $ Hello World!
+michaelwang $ _
 
 
 
@@ -260,7 +260,7 @@
     <div class="blocks stacked">
       <div class="block odd">
         <div class="text text-justify">
-          <h2>About Me</h2>
+          <h2 style="width: 100px; border-bottom: 1px solid #ccc;">About Me</h2>
           <p>I am fascinated by asset pricing and trading algorithms. I enjoy thinking the financial markets using a mathematical mind. I regard myself as financial engineer, but I primarily see financial engineering as a means to make the market efficient.</p>
         </div>
         <div class="media">
@@ -290,24 +290,78 @@
 
         </div>
       </div><!-- /.block -->
-      <div class="block even">
+      <div class="block-lg even">
         <div class="text">
-          <h2>Uthappizza</h2>
-          <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, <a href="#">Vidalia onion</a>, Guntur chillies and Buffalo Paneer.</p>
+          <h2 style="width: 100px; border-bottom: 1px solid #ccc;">Education</h2>
+          <div class="row">
+            <div class="col-sm-9">
+              <ul class="education">
+                <li>
+                  <div class="degree-year">
+                    <span class="degree">Master of Financial Engineering</span>
+                    <span class="year">2015</span>
+                  </div>
+                  <div class="description">
+                    <p>Master of Financial Engineering</p>
+                    <p class="where"><a href="http://www.anderson.ucla.edu/">UCLA, Anderson School of Management</a></p>
+                  </div>
+                </li>
+                <li>
+                  <div class="degree-year">
+                    <span class="degree">M.S.</span>
+                    <span class="year" style="margin-left: -1px !important;">2014</span>
+                  </div>
+                  <div class="description">
+                    <p>Master of Science in Statistics</p>
+                    <p class="where"><a href="http://www.ucla.edu/">University of California, Los Angeles</a></p>
+                  </div>
+                </li>
+                <li>
+                  <div class="degree-year">
+                    <span class="degree">B.Eng.</span>
+                    <span class="year">2012</span>
+                  </div>
+                  <div class="description">
+                    <p>Bachelar of Engineering in Electrical Engineering</p>
+                    <p class="where"><a href="http://www.hrbeu.edu.cn/">Harbin Engineering University</a></p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="media">
           <div class="terminal-window">
-            <div class='top-bar'></div>
+            <div class='top-bar'>
+              <i class="half-yellow"></i>
+              <i class="green"></i>
+            </div>
             <div class='window-content'>
               <div class="dark-code">
-              <pre><code class="language-bash">~/Apps $ php artisan make:migration create_users_table
-Migration created successfully!
+              <pre><code class="language-latex">@string{ Education }
 
-~/Apps $ php artisan migrate --seed
-Migrated: 2015_01_12_000000_create_users_table
-Migrated: 2015_01_12_100000_create_password_resets_table
-Migrated: 2015_01_13_162500_create_projects_table
-Migrated: 2015_01_13_162508_create_servers_table
+@UCLA, Anderson School of Management{anderson:2015,
+    education = { Master of Financial Engineering },
+    year = { Nov. 2014 ~ Dec. 2015 },
+    final project = { Multi-Asset Economic Scenario Generation },
+}
+
+
+@UCLA, Department of Statistics{stats:2014,
+    education = { Master of Science, Statistics },
+    year = { Sept. 2012 ~ Sept. 2014 },
+    thesis = { Visualization of Video Sequence in 3D Space },
+}
+
+
+@Harbin Engineering Universiy{heu:2012,
+    education = { Bachelor of Engineering, Electrical Engineering },
+    year = { Aug. 2008 ~ June 2012 },
+}
+
+
+
+
 </code></pre></div>
             </div>
           </div>
@@ -315,8 +369,21 @@ Migrated: 2015_01_13_162508_create_servers_table
       </div><!-- /.block -->
       <div class="block odd">
         <div class="text">
-          <h2>Weekend Grand Buffet</h2>
-          <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person.</p>
+          <h2 style="width: 196px; border-bottom: 1px solid #ccc;">Research Interests</h2>
+          <div class="row">
+            <div class="col-sm-5">
+              <ul class="interests">
+                <li>Asset Pricing</li>
+                <li>Behavioral Finance</li>
+              </ul>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <ul class="interests">
+                <li>Computational Finance</li>
+                <li>Trading Algorithms</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="media">
 
@@ -329,25 +396,187 @@ Migrated: 2015_01_13_162508_create_servers_table
               </div>
             </div>
             <div class='window-content'>
-              <pre class="line-numbers"><code class="language-php">Route::resource('photos', 'PhotoController');
+              <pre class="line-numbers"><code class="language-python">#!/usr/bin/python
 
-/**
- * Retrieve A User...
- */
-Route::get('/user/{user}', function(App\User $user)
-{
-  return $user;
-})
+class ResearchInterests:
+  """My Personal Research Interests"""
+  interest_count = 0
 
-return $that
+  def __int__(self, interest):
+    self.interest = interest
+    ResearchInterests.interest_count += 1
 
-get the name
+  def displayCount(self):
+    print "Total Research Interests Field %d" % ResearchInterests.interest_count
+
+
+
 </code></pre>
           </div>
         </div>
       </div><!-- /.block -->
     </div>
   </section>
+
+  <section class="panel skills light"  style="background-image: url('assets/img/new-bg.svg'); background-repeat: no-repeat; background-position: center center;">
+    <h1>Skills</h1>
+  
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+  <div class="col-sm-4">
+    <div class="card-container">
+      <div class="card">
+        <div class="front"  style="background-image: url('assets/img/skills/rotating_card_thumb.jpg'); background-repeat: no-repeat; background-position: center center;">
+          <div class="cover">
+            <div class="user">
+            <img  src="assets/img/skills/r-lang.svg"/>
+          </div>
+          </div>
+        </div> <!-- end front panel -->
+        <div class="back">
+<div class='browser-window'>
+            <div class='top-bar'>
+              <div class='circles'>
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+              </div>
+            </div>
+            <div class='window-content'>
+              <pre class="line-numbers"><code class="language-r">#!/usr/bin/env Rscript
+
+library(data.table)
+library(lubridate)
+
+# read in the daily data
+returns <- fread('returns.csv')
+treasury  <- fread('treasury.csv')
+
+returns[, five_year := ceiling((year - 1972) / 5)]
+
+setkeyv(returns, key_cols)
+setkeyv(treasury, key_cols)
+returns <- returns[treasury, nomatch = 0]
+
+
+</code></pre>
+          </div>
+        </div>
+        </div> <!-- end back panel -->
+      </div> <!-- end card -->
+    </div> <!-- end card-container -->
+  </div> <!-- end col sm 3 --> 
+  <div class="col-sm-4">
+    <div class="card-container">
+      <div class="card">
+        <div class="front"  style="background-image: url('assets/img/skills/rotating_card_thumb2.png'); background-repeat: no-repeat; background-position: center center;">
+          <div class="cover">
+            <div class="user">
+            <img  src="assets/img/skills/python-5.svg"/>
+          </div>
+          </div>
+        </div> <!-- end front panel -->
+        <div class="back">
+<div class='browser-window'>
+            <div class='top-bar'>
+              <div class='circles'>
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+              </div>
+            </div>
+            <div class='window-content'>
+              <pre class="line-numbers"><code class="language-python">#!/usr/bin/python
+
+class ResearchInterests:
+  """My Personal Research Interests"""
+  interest_count = 0
+
+  def __int__(self, interest):
+    self.interest = interest
+    ResearchInterests.interest_count += 1
+
+  def displayCount(self):
+    print "Total Research Interests Field %d" % ResearchInterests.interest_count
+
+
+
+</code></pre>
+          </div>
+        </div>
+        </div> <!-- end back panel -->
+      </div> <!-- end card -->
+    </div> <!-- end card-container -->
+  </div> <!-- end col sm 3 --> 
+  <div class="col-sm-4">
+    <div class="card-container">
+      <div class="card">
+        <div class="front"  style="background-image: url('assets/img/skills/rotating_card_thumb3.png'); background-repeat: no-repeat; background-position: center center;">
+          <div class="cover">
+            <div class="user">
+            <img  src="assets/img/skills/c.svg"/>
+          </div>
+          </div>
+        </div> <!-- end front panel -->
+        <div class="back">
+<div class='browser-window'>
+            <div class='top-bar'>
+              <div class='circles'>
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+              </div>
+            </div>
+            <div class='window-content'>
+              <pre class="line-numbers"><code class="language-cpp">#include "iostream"
+#include "vector"
+
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+  cout << "Hello, World!" << endl;
+  
+  return 0;
+}
+
+</code></pre>
+          </div>
+        </div>
+        </div> <!-- end back panel -->
+      </div> <!-- end card -->
+    </div> <!-- end card-container -->
+  </div> <!-- end col sm 3 --> 
+  </div> 
+  </div>
+  </div>
+  </section>
+
+  <footer class="main">
+    <div>
+      <ul>
+        <li>
+          adfasf
+        </li>
+        <li>adfasfa</li>
+        <li>sdfsad</li>
+      </ul>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -360,59 +589,60 @@ get the name
   <script src="js/prism.js"></script>
   <script src="js/viewport-units-buggyfill.js"></script>
   <script>window.viewportUnitsBuggyfill.init();</script>
+  <script>
+  $(document).ready(function() {
+    // Adapted from http://cs61.org
+    var announcementIndex = 0;
 
+    function setAnnouncements(offset) {
+      var newIndex = announcementIndex  + offset;
+      var announcementNumber = $('.announcement').length;
 
+      if (newIndex < 0 || newIndex >= announcementNumber) {
+        return;
+      }
 
+      $('#announcement-' + announcementIndex).hide(0, function() {
+        $('#announcement-' + newIndex).show(0);
+      });
 
+      announcementIndex = newIndex;
 
-
-<script>
-$(document).ready(function() {
-  // Adapted from http://cs61.org
-  var announcementIndex = 0;
-
-  function setAnnouncements(offset) {
-    var newIndex = announcementIndex  + offset;
-    var announcementNumber = $('.announcement').length;
-
-    if (newIndex < 0 || newIndex >= announcementNumber) {
-      return;
+      if (announcementIndex == 0) {
+        $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+          .attr("data-toggle", "popover");
+        $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+          .attr("data-placement", "left");
+        $('#announcement-' + announcementIndex + ' .announcement-btn-older')
+          .attr("data-content", "No more recent news.");
+      }
+      if (announcementIndex >= announcementNumber - 1) {
+        $('#announcement-' + announcementIndex + ' .announcement-btn-newer')
+          .addClass('disabled');
+      }
+      
     }
+    setAnnouncements(0);
 
-    $('#announcement-' + announcementIndex).hide(0, function() {
-      $('#announcement-' + newIndex).show(0);
+    $('.announcement-btn-older > a').click(function() {
+      setAnnouncements(-1);
     });
-
-    announcementIndex = newIndex;
-
-    if (announcementIndex == 0) {
-      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
-        .attr("data-toggle", "popover");
-      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
-        .attr("data-placement", "left");
-      $('#announcement-' + announcementIndex + ' .announcement-btn-older')
-        .attr("data-content", "No more recent news.");
-    }
-    if (announcementIndex >= announcementNumber - 1) {
-      $('#announcement-' + announcementIndex + ' .announcement-btn-newer')
-        .addClass('disabled');
-    }
-    
-  }
-  setAnnouncements(0);
-
-  $('.announcement-btn-older > a').click(function() {
-    setAnnouncements(-1);
+    $('.announcement-btn-newer > a').click(function() {
+      setAnnouncements(1);
+    });
+    $('[data-toggle="popover"]').popover();
   });
-  $('.announcement-btn-newer > a').click(function() {
-    setAnnouncements(1);
-  });
-  $('[data-toggle="popover"]').popover();
-});
-</script>
 
-
-
+  function rotateCard(btn){
+    var $card = $(btn).closest('.card-container');
+    console.log($card);
+    if($card.hasClass('hover')){
+      $card.removeClass('hover');
+    } else {
+      $card.addClass('hover');
+    }
+  };
+  </script>
 
 </body>
 

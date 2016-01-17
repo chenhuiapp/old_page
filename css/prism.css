@@ -224,7 +224,7 @@ pre.line-numbers > code {
 
 .dark-code :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: #272822;
+	background: #37474F;
 }
 
 /* Inline code */

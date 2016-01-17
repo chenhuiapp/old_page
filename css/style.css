@@ -402,37 +402,22 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   background-color: #f0f2f1;
 }
 
-.panel.statement {
+.panel.skills {
   display: table;
   table-layout: fixed;
-  height: 100vh;
-  min-height: 900px;
-  margin: 0 0 -100px 0;
+  height: 30vh;
+  min-height: 400px;
+  margin: 0 0 -10px 0;
   width: 100%;
   text-align: center;
 }
-.panel.statement .content {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
-  padding-bottom: 150px;
-}
-.panel.statement h1 {
+.panel.skills h1 {
+  font-family: 'Cantarell', sans-serif;
   font-size: 56px;
+  font-weight: 400;
+  color: #525252; 
 }
-.panel.statement h1 + p {
-  font-size: 28px;
-  font-weight: 100;
-  -webkit-font-smoothing: subpixel-antialiased;
-}
-.panel.statement p.caption {
-  color: #525252;
-  font-size: 18px;
-}
-.panel.statement .browser-window {
-  display: block;
-  margin: 8vh auto 15px;
-}
+
 .panel.announcements {
   display: table;
   table-layout: fixed;
@@ -452,7 +437,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
   font-family: 'Cantarell', sans-serif;
   font-size: 56px;
   font-weight: 400;
-  color: #6f5499; 
+  color: #525252; 
 }
 .panel.announcements h1 + p {
   font-size: 28px;
@@ -505,7 +490,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
           font-family: 'Medula One', cursive;
           font-size: 40px;
           font-weight: 400;
-          color: #6f5499; 
+          color: #525252; 
         }
         .panel.features .blocks .block .text a,
         .panel.features .blocks .block .text a:active, 
@@ -551,6 +536,72 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
         font-size: 14px;
         color: #80878c;
       }
+
+    .panel.features .blocks .block-lg {
+      border-bottom: 1px solid #dbdcdb;
+      height: 500px;
+      overflow: hidden;
+    }
+      .panel.features .blocks .block-lg:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .panel.features .blocks .block-lg .text {
+        padding: 20px;
+        width: 60%;
+        float: left;
+      }
+        .panel.features .blocks .block-lg .text h2 {
+          font-family: 'Medula One', cursive;
+          font-size: 40px;
+          font-weight: 400;
+          color: #525252;
+        }
+        .panel.features .blocks .block-lg .text a,
+        .panel.features .blocks .block-lg .text a:active, 
+        .panel.features .blocks .block-lg .text a:visited {
+          border-bottom: dashed 1px #ccc;
+          text-decoration: none;
+          color: #4B2E83;
+        }
+        .panel.features .blocks .block-lg .text a:hover {
+          /* red */
+          border-bottom: solid 1px #4B2E83;
+          color: #4B2E83;
+          text-decoration: none;
+        }
+      .panel.features .blocks .block-lg .media {
+        float: right;
+        padding-top: 20px;
+        width: 40%;
+        overflow: hidden;
+      }
+        .panel.features .blocks .block-lg .media .browser-window {
+          width: 600px;
+        }
+      .panel.features .blocks .block-lg.odd .text {
+        padding: 20px 60px;
+      }
+      .panel.features .blocks .block-lg.even .text {
+        float: right;
+      }
+      .panel.features .blocks .block-lg.even .media {
+        float: left;
+      }
+        .panel.features .blocks .block-lg.even .media .terminal-window {
+          float: left;
+          margin-left: -5px;
+          width: 360px;
+          height: 600px;
+        }
+          .panel.features .blocks .block-lg.even .media .terminal-window pre[class*="language-"] {
+            border-radius: 0;
+            margin-top: 0;
+          }
+      .panel.features .blocks .block-lg p {
+        color: #525252;
+      }
 .panel .browser-window,
 .panel .terminal-window {
   overflow: hidden;
@@ -568,11 +619,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
 }
 
 @media (max-width: 760px) {
-  .panel.statement h1 {
+  .panel.skills h1 {
     font-size: 42px;
     line-height: 1.2;
   }
-    .panel.statement h1 + p {
+    .panel.skills h1 + p {
       font-size: 21px;
     }
   .panel.announcements h1 {
@@ -588,10 +639,16 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
     .panel.features .blocks .block .text p {
       margin-bottom: 0;
     }
+  .panel.features .blocks .block-lg .text {
+    padding: 15px;
+  }
+    .panel.features .blocks .block-lg .text p {
+      margin-bottom: 0;
+    }
 }
 
 @media (max-width: 620px) {
-  .panel.statement .browser-window {
+  .panel.skills .browser-window {
     width: 100%;
   }
   .panel.announcements .browser-window {
@@ -620,6 +677,26 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
         margin: 0 5% !important;
         float: none !important;
       }
+  .panel.features .blocks .block-lg {
+    height: 800px;
+  }
+    .panel.features .blocks .block-lg .text {
+      width: 100%;
+      float: none !important;
+      display: block;
+      padding: 5%;
+    }
+    .panel.features .blocks .block-lg .media {
+      float: none !important;
+      display: block;
+      width: 100%;
+    }
+      .panel.features .blocks .block-lg .media .terminal-window,
+      .panel.features .blocks .block-lg .media .browser-window {
+        width: 90% !important;
+        margin: 0 5% !important;
+        float: none !important;
+      }
 }
 
 .browser-window,
@@ -643,7 +720,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
     border-bottom: thin solid #dfdfde;
     background: #ebebeb;
   }
-  .browser-window .top-bar i {
+  .browser-window .top-bar i,
+  .terminal-window .top-bar i {
     width: 10px;
     height: 10px;
     display: inline-block;
@@ -652,14 +730,22 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
     margin: 9px;
     margin-right: 0;
   }
-  .browser-window .top-bar i.red {
+  .browser-window .top-bar i.red,
+  .terminal-window .top-bar i.red {
     background-color: #ff5f57;
   }
-  .browser-window .top-bar i.yellow {
+  .browser-window .top-bar i.yellow,
+  .terminal-window .top-bar i.yellow {
     background-color: #ffbd2e;
   }
-  .browser-window .top-bar i.green {
+  .browser-window .top-bar i.green,
+  .terminal-window .top-bar i.green {
     background-color: #2ace42;
+  }
+  .browser-window .top-bar i.half-yellow,
+  .terminal-window .top-bar i.half-yellow {
+    margin-left: -1px;
+    background-color: #ffbd2e;
   }
   .browser-window .top-bar span {
     text-align: center;
@@ -697,4 +783,215 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand{
 .announcement-btn-older:hover, 
 .announcement-btn-newer:hover {
   cursor: pointer;
+}
+
+
+ul.education {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+ul.education li {
+    position: relative;
+    padding: 50px 15px 20px 15px;
+    background-color: #fdfdfd;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0px 3px 3px -3px #ccc;
+    box-shadow: 0px 3px 3px -3px #ccc;
+    border-radius: 3px;
+    margin-left: 10px;
+    color: #333;
+}
+ul.education li .degree-year {
+    position: absolute;
+    top: 15px;
+    left:-8px;
+    border-radius: 3px;
+    padding: 0;
+    color: white;
+}
+
+ul.education li .degree-year span {
+    padding: 7px 10px;
+    line-height: 30px;
+    margin: 0;
+}
+
+ul.education li .degree-year .degree {
+    background-color: #8e44ad;
+}
+
+ul.education li .degree-year .year {
+    background-color: #9b59b6;
+    -webkit-box-shadow: -3px 0px 7px -3px rgba(68, 68, 68, 0.5);
+    box-shadow: -3px 0px 7px -3px rgba(68, 68, 68, 0.5);
+    margin-left: -2px !important;
+}
+
+ul.education li .description p {
+  font-size: 16px;
+  margin: 0;
+}
+
+ul.education li .description p.where {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+ul.interests {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+ul.interests li {
+  padding: 7px;
+  background-color: #fdfdfd;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0px 3px 3px -3px #ccc;
+  box-shadow: 0px 3px 3px -3px #ccc;
+  border-radius: 2px;
+  border-left: 5px solid;
+  border-left-color: #9b59b6;
+}
+
+/* entire container, keeps perspective */
+.card-container {
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -o-perspective: 800px;
+  perspective: 800px;
+  margin-bottom: 30px;
+}
+/* flip the pane when hovered */
+.card-container:not(.manual-flip):hover .card,
+.card-container.hover.manual-flip .card{
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+}
+
+
+.card-container.static:hover .card, 
+.card-container.static.hover .card {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -o-transform: none;
+  transform: none;
+}
+/* flip speed goes here */
+.card {
+  -webkit-transition: -webkit-transform .5s;
+  -moz-transition: -moz-transform .5s;
+  -o-transition: -o-transform .5s;
+  transition: transform .5s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+  z-index: 3;
+}
+
+
+/*        Style       */
+.card {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-radius: 4px;
+  color: #444444;
+}
+.card-container,
+.front,
+.back {
+  width: 100%;
+  height: 245px;
+  border-radius: 4px;
+}
+.card .cover{
+  height: 215px;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+  background-image: url('images/rotating_card_thumb.png');
+}
+.card .cover img{
+  width: 100%;
+}
+.card .user{
+  border-radius: 50%;
+  display: block;
+  height: 120px;
+  margin: 60px auto;
+  overflow: hidden;
+  width: 120px;
+}
+.card .user img {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 4px solid #FFFFFF;
+  width: 100%;
+}
+
+.card .back .browser-window {
+  display: block;
+  margin: 0vh auto;
+  width: 100%;
+  height: 100%;
+}
+
+/*       Fix bug for IE      */
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .front, .back{
+    -ms-backface-visibility: visible;    
+    backface-visibility: visible;
+  }
+  
+  .back {
+    visibility: hidden;
+    -ms-transition: all 0.2s cubic-bezier(.92,.01,.83,.67);
+  }
+  .front{
+    z-index: 4;
+  }
+  .card-container:not(.manual-flip):hover .back,
+  .card-container.manual-flip.hover .back{
+    z-index: 5;
+    visibility: visible;
+  }
+}
+
+
+
+
+
+footer.main {
+    background: #fafafa;
+    padding: 35px 20px;
+    text-align: center;
 }
