@@ -9,6 +9,11 @@ To access it, use http://morningfin.github.io
 # To Do
 
 - [ ] Let the header avatar fixed
-- [ ] Finish homepage footer
-- [ ] make resume modal responsive
+- [ ] Finish ESG Page
+- [ ] Write about Sumblime for Anderson MFE using R
+- [ ] Write about R usage in Anderson MFE
+- [ ] Write about Python
+- [ ] Write about Latex
+- [X] ~~Finish homepage footer~~
+- [X] ~~make resume modal responsive~~
 - [X] ~~Fix News Background image Figure~~
