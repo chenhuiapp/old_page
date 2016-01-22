@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body>
+  {% include os-header.html %}
+
+  <section class="panel" id="main-docs">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" role="complementary">
+        {% include os-sidebar.html %}
+        </div>
+        <div class="col-md-9" role="main-doc">
+        {{ content }}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% include footer.html %}
+
+  <script>
+    $('body').scrollspy({
+        target: '.docs-sidebar',
+        offset: 40
+    });
+    $("#sidebar").affix({
+        offset: {
+          top: 380,
+          bottom: function () {
+            return (this.bottom = $('.footer').outerHeight(true))
+          }
+        }
+    });
+    anchors.add('.anchored');
+  </script>
+
+</body>
+
+</html>
