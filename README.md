@@ -17,3 +17,4 @@ To access it, use http://morningfin.github.io
 - [X] ~~Finish homepage footer~~
 - [X] ~~make resume modal responsive~~
 - [X] ~~Fix News Background image Figure~~
+- [X] ~~Finish using Jekyll~~

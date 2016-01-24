@@ -1,0 +1,629 @@
+---
+layout: project
+title: Book-Chapter 1
+permalink: /book/chap1.html
+---
+<div class="col-md-3" role="complementary">
+  <nav class="docs-sidebar">
+    <ul class="nav" id="sidebar">
+      <li><a href="#Chapter-1">Chapter 1</a></li>
+      <li><a href="#ew-port">Creating Equally-Weighted Portfolios</a></li>
+      <li><a href="#cw-port">Creating Capitalization-Weighted Portfolios</a></li>
+      <li><a href="#rebalance">Varying Rebalance Frequency</a></li>
+      <li><a href="#analytics">Analytics</a>
+        <ul class="nav">
+          <li><a href="#industry-weights">Industry Weights</a></li>
+          <li><a href="#turnover">Turnover</a></li>
+        </ul>
+      </li>
+      <li><a href="#top">Back to top</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="col-md-9" role="main-doc">
+  <h1 id="Chapter-1" class="Page-header anchored">Chapter 1</h1>
+
+  <p>Under Mac OS X environment, open RStudio, you should see something like this.</p>
+
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/defaultR.png" | prepend: baseurl }}" style="width: 100%">
+    <!-- <figcaption>Fig1. - 41 Days Return Distribution.</figcaption> -->
+  </figure>
+
+  <p>First, we need to create a new <code>R</code> script, and set the working directory of the script. Click on the console pane and type:</p>
+
+  <pre><code class="language-r">setwd("/Users/YourUsrName/Desktop/data")</code></pre>
+
+  <p>or</p>
+
+  <pre><code class="language-r">setwd("~/Desktop/data")</code></pre>
+
+  <p>Under Unix/Linux system, <code class="language-r">~</code> is short for <code class="language-r">/Users/YourUsrName</code>. Now, the console pane will indicate that the current working directory is <code class="language-r">~/Desktop/data</code>, as shown in the following figure.</p> 
+
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/consoleR.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+
+  <p>Copy the above line to your <code>R</code> script file. Remember to set your working directory before you start working every time. Now we need to read in the data we just downloaded.</p>
+
+  <p>There are several <code>R</code> packages that is very useful when we are performing portfolio construction, which are <code class="language-r">data.table</code>, <code class="language-r">dplyr</code>, and <code class="language-r">lubridate</code>. <code class="language-r">data.table</code> and <code class="language-r">dplyr</code> are designed to manipulate with large dataset, while <code class="language-r">lubridate</code> is for time manipulation. For details about these packages, please refer to the following links, <a href="https://github.com/Rdatatable/data.table" target="_blank"><code class="language-r">data.table</code></a>, <a href="https://github.com/hadley/dplyr" target="_blank"><code class="language-r">dplyr</code></a>, and <a href="https://github.com/hadley/lubridate" target="_blank"><code class="language-r">lubridate</code></a>.</p>
+
+  <pre><code class="language-r"># load necessary packages
+  library(data.table)
+  library(dplyr)
+  library(lubridate)
+
+  # read in crsp data
+  crsp <- fread("crsp_monthly.csv")
+  </code></pre>
+
+  <p>The command <code class="language-r">fread</code> stands for fast read and is very useful when dealing with very large datasets. Now your RStudio would look like the following figure.</p>
+
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/full.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+
+  <p>We can ignore the warning messages, since it is caused by the different type of input in a given column. On the right hand side, we can find that the <code>R</code> environment now has a new variable names "CRSP" with 396507 observations and 22 variables. (I am using data from 2007 to 2014. The data from 1925 to 2014 should be larger.) Now let us do something interesting with the monthly CRSP data set! Type in the code below, we will explain each of these lines in turn.</p>
+
+  <pre><code class="language-r"># change the crsp colnames to lower case
+  setnames(crsp, colnames(crsp), tolower(colnames(crsp)))
+
+  # get the data date year and month data
+  crsp[, date := ymd(date)][, ":=" (year = year(date), month = month(date))]
+
+  # convert the crsp data from R level type to R numeric type
+  crsp[, ":=" (ret   = as.numeric(ret),   retx   = as.numeric(retx),
+               dlret = as.numeric(dlret), dlretx = as.numeric(dlretx),
+               prc   = as.numeric(prc),   shrout = as.numeric(shrout))]
+
+  # Price and Return adjusted for delisting
+  crsp[is.na(ret),  ret  := dlret]
+  crsp[is.na(retx), retx := dlretx]
+
+  # only keep meaningful returns and force price to be positive
+  crsp <- crsp[ret >= -1, ]
+  crsp[, prc := abs(prc)]
+
+  # remove the delisting returns 
+  crsp[, c("date", "dlret", "dlretx") := NULL]
+  </code></pre>
+
+  <p>The above codes are written in the style of <code class="language-r">data.table</code>. The first two lines are simply converting all the column names of crsp to lower case, which will make the future coding simple, since <code>R</code> is a case-sensitive language.</p>
+
+  <pre><code class="language-r"># get the data date year and month data
+  crsp[, date := ymd(date)][, ":=" (year = year(date), month = month(date))]</code></pre>
+
+  <p>These two lines first use <code class="language-r">ymd</code> from <code class="language-r">lubridate</code> converting date input to our desired date type, then use <code class="language-r">year</code> and <code class="language-r">month</code> to extract year and month information, and create two new columns named "year" and "month".</p>
+
+  <pre><code class="language-r"># convert the crsp data from R level type to R numeric type
+  crsp[, ":=" (ret   = as.numeric(ret),   retx   = as.numeric(retx),
+               dlret = as.numeric(dlret), dlretx = as.numeric(dlretx),
+               prc   = as.numeric(prc),   shrout = as.numeric(shrout))]
+
+  # Price and Return adjusted for delisting
+  crsp[is.na(ret),  ret  := dlret]
+  crsp[is.na(retx), retx := dlretx]
+
+  # only keep meaningful returns and force price to be positive
+  crsp <- crsp[ret >= -1, ]
+  crsp[, prc := abs(prc)]
+  </code></pre>
+
+  <p>In <code>R</code>, the type of a variable is very important, we need to make sure all the price, return, and share information are in numeric type. And the first command is doing the job. <code class="language-r">crsp[is.na(ret),  ret  := dlret]</code> is to find the <code class="language-r">NA</code> value in the "ret" column and replace it with the corresponding value of "dlret" column. The last two lines are just select the rows with return higher than -1 and make all the price equal to its absolute value, since negative price is meaningless.</p>
+
+  <pre><code class="language-r"># remove the delisting returns
+  crsp[, c("dlret", "dlretx") := NULL]  
+  </code></pre>
+
+  <p>This line is just removing the necessary columns.</p>
+
+  <p>Now, we are ready to calculate some simple portfolios. Not like <code>SAS</code>, in <code>R</code>, we are directly manipulating with the data we read in, namely "CRSP". If you would like to keep this data unchanged, use the following command, <code class="language-r">stock_returns <- copy(crsp)</code>. <strong>Be careful</strong>, you should never use <code class="language-r">stock_returns <- crsp</code> to make a copy of your original dataset, since under this assigning scheme, each operation on <code class="language-r">stock_returns</code> will also affect the original <code class="language-r">crsp</code> dataset!!!. This is caused by the pass-by-reference nature of <code class="language-r">data.table</code>.</p>
+
+  <h2 id="ew-port" class="anchored">Creating Equally-Weighted Portfolios</h2>
+
+  <p>To sort, there is a simple argument in <code class="language-r">data.table</code>, <code class="language-r">crsp <- crsp[order(-permno, year, month)]</code>, where the negative sign indicates that we are sorting this variable in descending order.</p>
+
+  <p>If you want to remove duplicates, you can use the following codes</p>
+
+  <pre><code class="language-r"># remove duplicates in crsp dataset
+  crsp <- unique(crsp)  
+  </code></pre>
+
+  <p>Now, we can calculate equal-weighted returns. Equally-weighted returns are the easiest returns to calculate because you just take the average of all the returns.</p>
+
+  <pre><code class="language-r"># equal-weighted portfolio
+  # dplyr format
+  equal_weighted_portfolio_dplyr <- crsp %>% group_by(year, month) %>%
+      summarise(ewtr = mean(ret), ewpr = mean(retx))
+  # data.table format
+  equal_weighted_portfolio_DT <- crsp[, lapply(.SD, mean),
+                                      .SDcols = c("ret", "retx"),
+                                      by = .(year, month)]
+  setnames(equal_weighted_portfolio_DT, c("ret", "retx"), c("ewtr", "ewpr"))
+  # the above two operations are identical
+  </code></pre>
+  <code class="language-r"></code>
+  <p>There are two ways of calculating average returns in <code>R</code>. Let us start with the <code class="language-r">dplyr</code> style, which is simple to understand. First, we are operating on the dataset <code class="language-r">crsp</code>, then we group <code class="language-r">crsp</code> by year and month, last we calculate the mean of ret and retx of each group using <code class="language-r">summarise</code> command. The <code class="language-r">%>%</code> symbol represents pipe function. Try pronouncing <code class="language-r">%>%</code> "then" whenever you see it. If you want to see the help page, you will need to wrap it in back ticks like so: <code class="language-r">?magrittr::`%>%`</code>. The <code class="language-r">data.table</code> way is much harder. First, we need to understand what <code class="language-r">.SD</code> and <code class="language-r">.SDcols</code> stand for. <code class="language-r">.SD</code> stands for something like "<code class="language-r">S</code>ubset of <code class="language-r">D</code>ata.table'', <code class="language-r">.SDcols</code> specifies the columns of <em>x</em> included in <code class="language-r">.SD</code>. <code class="language-r">lapply</code> tell <em>R</em> that we are applying the <code class="language-r">mean</code> function to the two columns "ret" and "retx". Grouping is achieved by <code class="language-r">by = .(year, month)</code>.</p>
+
+  <p>The <code class="language-r">dplyr</code> way is easier to understand, and slower, while the <code class="language-r">data.table</code> way is harder to understand, but faster. The performance comparison in <code>R</code> is the following</p>
+
+  <pre><code class="language-r">> system.time(
+        crsp %>% group_by(year, month) %>% 
+            summarise(ewtr = mean(ret), ewpr = mean(retx))
+        )
+     user  system elapsed 
+    0.052   0.014   0.066 
+  > system.time(
+        crsp[, lapply(.SD, mean), .SDcols = c("ret", "retx"),
+             by = .(year, month)]
+        )
+     user  system elapsed 
+    0.028   0.002   0.030 </code></pre>
+
+  <p>We can see that the total elapsed time of <code class="language-r">dplyr</code> is twice as much as <code class="language-r">data.table</code>.</p>
+
+  <p>The last step is to output our results.</p>
+
+  <pre><code class="language-r"># output
+  write.csv(equal_weighted_portfolio_dplyr,
+            "ew_monthly_returns.csv", row.names = FALSE)</code></pre>
+
+  <p>The first argument is the dataset we would like to output, the second is the output filename, and the last one indicates that we would not like to display the row names in our output file.</p>
+
+  <p>If you would like to calculate the volatility, the codes are simply the following</p>
+
+  <pre><code class="language-r"></code>equal_weighted_prtfolio_dplyr <- 
+      crsp %>% group_by(year, month) %>% 
+      summarise(volEwtr = sd(ret), volEwpr = sd(retx))
+  equal_weighted_portfolio_DT <- 
+      crsp[, lapply(.SD, sd), .SDcols = c("ret", "retx"), 
+           by = .(year, month)]
+  setnames(equal_weighted_portfolio_DT, 
+           c("ret", "retx"), c("vol_ewtr", "vol_ewpr"))</pre>
+
+  <h2 id="cw-port" class="anchored">Creating Capitalization-Weighted Portfolios</h2>
+
+  <p>Using CRSP as our original dataset, we will construct a market capitalization dataset. Following the same technique, we can create a new variable named <code class="language-r">lag_mkt_cap</code>.</p>
+
+  <pre><code class="language-r">lag_mkt_cap <- crsp[, .(permno, year, month, prc, shrout)]
+  lag_mkt_cap[, ":=" (lag_mkt_cap = prc * shrout, month = month + 1)]
+  lag_mkt_cap[, ":=" (year = ifelse(month == 13, year + 1, year),
+                      month = ifelse(month == 13, 1, month))]
+  lag_mkt_cap[, c("prc", "shrout") := NULL]</code></pre>
+
+  <p>This a long line of code, the first square bracket tells the compiler we are selecting only the <code class="language-r">permno</code>, <code class="language-r">year</code>, <code class="language-r">month</code>, <code class="language-r">prc</code>, and <code class="language-r">shrout</code> columns of <code class="language-r">crsp</code> dataset. Then the second square bracket computes a new column <code class="language-r">lag_mkt_cap</code> based on the corresponding price and shares data. The last bracket change all the "13" month to next year's January. Now we need to merge back to the original <code class="language-r">crsp</code> dataset. </p>
+
+  <pre><code class="language-r"># merge back the crsp dataset, without change the original crsp
+  crsp_merged <- merge(crsp, lag_mkt_cap, by = c("permno", "year", "month"),
+                       all = FALSE) # make sure data.table version >= 1.9.6
+
+  ##### old data.table version #####
+  # key_cols <- c("permno", "year", "month")
+  # setkeyv(crsp, key_cols); setkeyv(lag_mkt_cap, key_cols)
+  # crsp <- crsp[lag_mkt_cap, nomatch = 0]
+
+  # remove unuseful variable to clear memory
+  remove(lag_mkt_cap)</code></pre>
+
+  <p>In \code{data.table} setting, when performing merge technique, we can just call function <code class="language-r">merge</code>. The first two arguments are the two datasets we would like to merge, the third one is the key columns to refer, and the last one tells the compiler which kind of merging we are performing.</p>
+
+  <ul>
+    <li><code class="language-r">all = FALSE</code>=> inner join</li>
+    <li><code class="language-r">all = TRUE</code>=> full outer join</li>
+    <li><code class="language-r">all.x = TRUE</code>=> left outer join</li>
+    <li><code class="language-r">all.y = TRUE</code>=> right outer join</li>
+  </ul>
+
+  <p><strong>Note:</strong>When using the above codes, please make sure that your <code class="language-r">data.table</code> version is above or equal to 1.9.6. Since <code class="language-r">merge</code> is a generic function in base <code>R</code>, this line of code will act "wildly" if you are not in a proper setting. To be safe, just use the old version of merging, which uses the set keys technique. The last line is simply remove the variable <code class="language-r">lag_mkt_cap</code> we just created to release some machine memory.</p>
+
+  <p>Unlike <code>SAS</code>, <code>R</code> cannot take <code class="language-r">lag_mkt_cap</code> as real weight naively. Therefore, in order to calculate the cap-weighted portfolio returns, we need to calculate each portfolio component's weight at a given date.</p>
+
+  <pre><code class="language-r"># calcualte real cap-weight of each stock
+  crsp_merged[, total_cap := sum(lag_mkt_cap), by = .(year, month)]
+  crsp_merged[, cap_weights := lag_mkt_cap / total_cap][, total_cap := NULL]</code></pre>
+
+  <p>Based on these <code class="language-r">cap_weights</code>, we would be able to calculate the monthly cap-weighted portfolio returns.</p>
+
+  <pre><code class="language-r"># dplyr format
+  cap_weighted_portfolio_dplyr <- crsp_merged %>% group_by(year, month) %>%
+      summarise(cwtr = weighted.mean(ret, cap_weights),
+                cwpr = weighted.mean(retx, cap_weights))
+  # data.table format
+  cap_weighted_portfolio_DT <-
+      crsp_merged[, .(cwtr = weighted.mean(ret, cap_weights),
+                      cwpr = weighted.mean(retx, cap_weights)),
+                  by = .(year, month)]
+  # the above two operations are identical </code></pre>
+
+  <p>The function <code class="language-r">weight.mean(x, w)</code> calculates the weighted mean of sequence <code class="language-r">x</code> with respect to the given weights <code class="language-r">w</code>. By a little tweaking of the previous output code, we will have the following</p>
+
+  <pre><code class="language-r"># output
+  write.csv(cap_weighted_portfolio_dplyr, "cw_monthly_returns.csv",
+            row.names = FALSE)</code></pre>
+
+  <h2 id="rebalance" class="anchored">Varying Rebalance Frequency</h2>
+
+  <p>Back to our previous <code class="language-r">lag_mkt_cap</code> dataset, if we need to rebalance our portfolios, lagging price returns is a must. Based on our previous code, a <code class="language-r">lag_retx</code> can be created as follows.</p>
+
+  <pre><code class="language-r">lag_mkt_cap <- crsp[, .(permno, year, month, retx, prc, shrout)]
+  lag_mkt_cap[, ":=" (lag_mkt_cap = prc * shrout, month = month + 1,
+                      lag_retx = retx)]
+  lag_mkt_cap[, ":=" (year = ifelse(month == 13, year + 1, year),
+                     month = ifelse(month == 13, 1, month))]
+  lag_mkt_cap[, c("prc", "shrout", "ret") := NULL]</code></pre>
+
+  <p>The following codes are a little bit tricky, which require some thinking, I will walk your through it. In order to get a dynamic weight, we need first to create a dummy variable in our dataset, which equals to the corresponding ``year$\times12+$month''. The next line, we have an expression <code class="language-r">dummy := shift(diff(dummy), 1, fill = 1)</code>. The <code class="language-r">diff(dummy)</code>, takes the difference between two successive <code class="language-r">dummy</code> values. <code class="language-r">shift()</code> is a <code class="language-r">data.table</code> package function, which deal with lead/lag operations. In our code, <code class="language-r">shift(diff(dummy), 1, fill = 1)</code> indicates that we will lag the difference between two successive <code class="language-r">dummy</code> values by 1 step, and fill <code class="language-r">NA</code>s in the column with value of 1. <code>R</code> will automatically associate the difference of number 1 and number 2 to number 1. Since we would like it to be associated with number 2, the lag operation is necessary. The next three lines deal with the stocks' delisting issue. The vector <code class="language-r">v1/v2</code> stores all the positions that <code class="language-r">dummy</code> is greater than 1, with a 1 or the length of <code class="language-r">dummy</code>. The last line just transfer <code class="language-r">dummy</code> into different chunks.</p>
+
+  <pre><code class="language-r"># add a dummy column determines whether the previous observation 
+  # is from one month ago
+  lag_mkt_cap[, dummy := year * 12 + month]
+  lag_mkt_cap[, dummy := shift(diff(dummy), 1, fill = 1), by = permno]
+  v1 <- c(1, which(lag_mkt_cap$dummy > 1))
+  v2 <- c(which(lag_mkt_cap$dummy > 1), dim(lag_mkt_cap)[1] + 1)
+  lag_mkt_cap[, dummy := rep(1:length(v2 - v1), (v2 - v1))]</code></pre>
+
+  <p>Now based on these variables, we are able to calculate the annually rebalanced portfolio returns. Since <code>R</code> does not have a <code class="language-r">retain</code> function as <code>SAS</code> does, we would not be able to use the same logic in <code>SAS</code>. You should think of dynamic weights in the following way. Suppose we are creating a value weighted portfolio, and we are not able to rebalance the portfolio every month because of \underline{the high turnover}. In such a case, a stock's "value" at month 1 is the "value" at month 0 times the stock return in month 0.</p>
+
+  \begin{equation*}
+  \mathrm{MktCap}_1 = \mathrm{MktCap_0} * (1 + R_0)
+  \end{equation*}
+  <p>Then, we have</p>
+  \begin{equation*}
+  \mathrm{MktCap}_3 = \mathrm{MktCap_0} * (1 + R_0) * (1 + R_1) * (1 + R_2) \qquad \cdots
+  \end{equation*}
+
+  <p>Therefore, in order to implement this in \code{R}, we first need to calculate each stock's cumulative return during a year, and the dynamic weight can be calculated based on these cumulative returns.</p>
+
+  <pre><code class="language-r">lag_mkt_cap[, cum_ret := cumprod(1 + lag_retx) - 1, by = .(permno, dummy, year)]
+  # create dynamic weights
+  lag_mkt_cap[, dynamic_weight := lag_mkt_cap * (1 + cum_ret)]</code></pre>
+
+  <p>The rest of merging back and calculating portfolio returns is the same as what we did previously.</p>
+
+  <p>Ultimately, we would like to make our code simple and easy to use, that is where <code class="language-r">function</code> plays its role. I have wrapped all the previous codes into the following</p>
+
+  <pre><code class="language-r">CleanCRSP <- function(dt) {
+      # Clean the raw CRSP dataset.
+      #   This function will convert some object columns into numeric
+      #   remove unuseful columns, "dlret", "dlretx"
+      #   keep only the observations with return higher than -1
+      #   convert all price to its absolute value
+      #   and remove duplicates
+      #
+      # Args:
+      #   dt: Input data.table dataset
+      #
+      # Returns:
+      #   The cleaned CRSP dataset.
+      # copy a data.table dataset to 
+      A <- copy(dt)
+      setnames(A, colnames(A), tolower(colnames(A)))
+      # Error handling
+      necess_col <- c("date", "permno", "prc", "shrout",
+                      "ret", "retx", "dlret", "dlretx")
+      input_col <- colnames(A)
+      actual_col <- input_col[input_col %in% necess_col]
+      if (length(actual_col) < length(necess_col)) {
+          needed <- necess_col[!(necess_col %in% actual_col)]
+          message("Not enough default input value defined.")
+          stop("Please input \"", paste0(needed, ","), "\"")
+          return(NULL)
+      }
+      # convert the data values from R level type to R numeric type
+      suppressWarnings(
+        A[, ":=" (ret   = as.numeric(ret),   retx   = as.numeric(retx),
+                  dlret = as.numeric(dlret), dlretx = as.numeric(dlretx),
+                  prc   = as.numeric(prc),   shrout = as.numeric(shrout))]
+        )
+      # Price and Return adjusted for delisting
+      A[is.na(ret),  ret  := dlret]
+      A[is.na(retx), retx := dlretx]
+      # only keep meaningful returns and force price to be positive
+      A <- A[ret >= -1, ]
+      A[, prc := abs(prc)]
+      # remove the delisting returns 
+      A[, c("dlret", "dlretx") := NULL]
+      # remove duplicates in the dataset
+      A <- unique(A)
+      return(A)
+  }
+
+  EqualPortRet <- function(dt) {
+      # Calculate the equal-weighted portfolio returns, monthly rebalance.
+      #
+      # Args:
+      #   dt: Input data.table dataset
+      #
+      # Returns:
+      #   Monthly equal-weighted portfolio with total returns and price returns
+      A <- copy(dt)
+      setnames(A, colnames(A), tolower(colnames(A)))
+      # Error handling
+      necess_col <- c("ret", "retx", "year", "month")
+      input_col <- colnames(A)
+      actual_col <- input_col[input_col %in% necess_col]
+      if (length(actual_col) < length(necess_col)) {
+          needed <- necess_col[!(necess_col %in% actual_col)]
+          message("Not enough default input value defined.")
+          stop("Please input \"", paste0(needed, ","), "\"")
+          return(NULL)
+      }
+      A <- A[, lapply(.SD, mean), .SDcols = c("ret", "retx"),
+             by = .(year, month)]
+      setnames(A, c("ret", "retx"), c("ew_total_return", "ew_price_return"))
+      return(A)
+  }
+
+  CapPortRet <- function(dt) {
+      # Calculate the cap-weighted portfolio returns
+      #   rebalance frequnce is bounded by the given dataset variable, "freq"
+      #
+      # Args:
+      #   dt: Input data.table dataset
+      #
+      # Returns:
+      #   Cap-weighted portfolio with total returns and price returns
+      #   and certain rebalance frequence
+      A <- copy(dt)
+      setnames(A, colnames(A), tolower(colnames(A)))
+      # Error handling
+      necess_col <- c("ret", "retx", "year", "month", 
+                      "permno", "prc", "shrout", "freq")
+      input_col <- colnames(A)
+      actual_col <- input_col[input_col %in% necess_col]
+      if (length(actual_col) < length(necess_col)) {
+          needed <- necess_col[!(necess_col %in% actual_col)]
+          message("Not enough default input value defined.")
+          stop("Please input \"", paste0(needed, ","), "\"")
+          return(NULL)
+      }
+      # select useful columns to calculate weights
+      B <- A[, .(permno, year, month, retx, prc, shrout, freq)]
+      B[, ":=" (lag_mkt_cap = prc * shrout, month = month + 1,
+                lag_retx = retx)]
+      B[, ":=" (year = ifelse(month == 13, year + 1, year),
+                month = ifelse(month == 13, 1, month))]
+      B[, c("prc", "shrout", "retx") := NULL]
+      # add a dummy column determines whether the previous observation 
+      # is from one month ago
+      B[, dummy := year * 12 + month]
+      suppressWarnings(
+        B[, dummy := shift(diff(dummy), 1, fill = 1), by = permno]
+        )
+      v1 <- c(1, which(B$dummy > 1))
+      v2 <- c(which(B$dummy > 1), dim(B)[1] + 1)
+      B[, dummy := rep(1:length(v2 - v1), (v2 - v1))]
+      B[, cum_ret := cumprod(1 + lag_retx) - 1, by = .(permno, dummy, freq)]
+      # create dynamic weights
+      B[, dynamic_weight := lag_mkt_cap * (1 + cum_ret)]
+      # merge back the crsp dataset, without change the original crsp
+      C <- merge(A, B, by = c("permno", "year", "month"),
+                 all = FALSE) # make sure data.table version >= 1.9.6
+      # calcualte real cap-weight of each stock
+      C[, total_cap := sum(dynamic_weight), by = .(year, month)]
+      C[, cap_weights := dynamic_weight / total_cap][, total_cap := NULL]
+      D <- C[, .(cw_total_return = weighted.mean(ret, cap_weights),
+                 cw_price_return = weighted.mean(retx, cap_weights)),
+                 by = .(year, month)]
+      return(D)
+  }
+
+  RebalanceCalculation <- function(dt, FUN) {
+      # A wrapper function to calculate porfolio returns
+      #
+      # Args:
+      #   dt: Input data.table dataset
+      #
+      # Returns:
+      #   Portfolio with total returns and price returns
+      #   and certain rebalance frequence
+      A <- copy(dt)
+      FUN <- match.fun(FUN)
+      return(FUN(A))
+  }
+
+  CalRet <- function(dt,
+                     rebalance = c("monthly", "quarterly",
+                                   "semiannually", "annually"),
+                     weight = c("ew", "vw")){
+      # Calculate CRSP equal-weighted/cap-weighted portfolio returns
+      #   with certain rebalance frequence
+      #
+      # Args:
+      #   dt: Input raw data.table dataset
+      #   rebalance: The rebalance frequence of the portfolio. Aiming at
+      #              cap-weighted protfolio, not useful for equla-weighted
+      #              portfolio. Defualt is monthly
+      #   weight: The weighting method of the desired portfolio. 
+      #           Default is equal-weighted
+      #
+      # Returns:
+      #   Portfolio with total returns and price returns
+      #   and certain rebalance frequence
+      # check the rebalance frequence, and weighting methods
+      # this will make the default as monthly rebalance and equal-weight
+      rebalance <- match.arg(rebalance)
+      weight <- match.arg(weight)
+      # copy the input data.table to play with
+      A <- copy(dt)
+      # make sure the input is a data.table format
+      if (!is.data.table(A)) {
+          A <- data.table(A)
+      }
+      A <- CleanCRSP(A)
+      # make sure that A contains the column year
+      A[, date := ymd(date)][, ":=" (year = year(date), month = month(date))]
+      # get the rebalance frequence
+      if (rebalance == "monthly") {
+          A[, freq := month]
+      } else if (rebalance == "quarterly") {
+          A[, freq := quarter(date)]
+      } else if (rebalance == "semiannually") {
+          A[, freq := ifelse(month < 7, 1, 2)]
+      } else if (rebalance == "annually") {
+          A[, freq := year]
+      }
+      # calculate portfolio returns
+      if (weight == "ew") {
+          return(RebalanceCalculation(A, EqualPortRet))
+      } else {
+          return(RebalanceCalculation(A, CapPortRet))
+      }
+  }</code></pre>
+
+  <p>The codes seem to be long right? But a typical well-documented code snippet should always include function documentations and comments. Do not be scared of it. As you read through, you will find that you have met all the core codes.</p>
+
+  <h2 id="analytics" class="anchored">Analytics</h2>
+
+  <p>We know how to construct basic portfolios. Next, we should learn to compute basic analytics. We will calculate industry weights, turnover, and performance tables.</p>
+
+  <h3 id="industry-weights">Industry Weights</h3>
+
+  <p>This time we modify the <code class="language-r">CleanCRSP</code> function a little bit.</p>
+
+  <pre><code class="language-r">CleanCRSP <- function(dt) {
+      # Clean the raw CRSP dataset.
+      #   This function will convert some object columns into numeric
+      #   remove unuseful columns, "dlret", "dlretx"
+      #   keep only the observations with return higher than -1
+      #   convert all price to its absolute value
+      #   and remove duplicates
+      #
+      # Args:
+      #   dt: Input data.table dataset
+      #
+      # Returns:
+      #   The cleaned CRSP dataset.
+      # copy a data.table dataset to 
+      A <- copy(dt)
+      setnames(A, colnames(A), tolower(colnames(A)))
+      # Error handling
+      necess_col <- c("date", "permno", "prc", "shrout",
+                      "ret", "retx", "dlret", "dlretx")
+      input_col <- colnames(A)
+      actual_col <- input_col[input_col %in% necess_col]
+      if (length(actual_col) < length(necess_col)) {
+          needed <- necess_col[!(necess_col %in% actual_col)]
+          message("Not enough default input value defined.")
+          stop("Please input \"", paste0(needed, ","), "\"")
+          return(NULL)
+      }
+      # convert the data values from R level type to R numeric type
+      suppressWarnings(
+        A[, ":=" (ret   = as.numeric(ret),   retx   = as.numeric(retx),
+                  dlret = as.numeric(dlret), dlretx = as.numeric(dlretx),
+                  prc   = as.numeric(prc),   shrout = as.numeric(shrout))]
+        )
+      # Price and Return adjusted for delisting
+      A[is.na(ret),  ret  := dlret]
+      A[is.na(retx), retx := dlretx]
+      # only keep meaningful returns and force price to be positive
+      A <- A[ret >= -1, ]
+      A[, prc := abs(prc)]
+      # remove the delisting returns 
+      A[, c("dlret", "dlretx") := NULL]
+      # remove duplicates in the dataset
+      A <- unique(A)
+
+      # set sector
+      SetSector <- function(siccd){
+          siccd = as.numeric(siccd)
+          if (is.na(siccd)){
+              siccd = 1
+          } 
+          if ( (siccd >= 0100 & siccd <= 0999) |
+               (siccd >= 2000 & siccd <= 2399) |
+               (siccd >= 2700 & siccd <= 2749) |
+               (siccd >= 2770 & siccd <= 2799) |
+               (siccd >= 3100 & siccd <= 3199) |
+               (siccd >= 3940 & siccd <= 3989) ) {
+            return("ConsumerNonDurable")
+          } else if ( (siccd >= 2500 & siccd <= 2519) |
+                      (siccd >= 2590 & siccd <= 2599) |
+                      (siccd >= 3630 & siccd <= 3659) |
+                      (siccd >= 3710 & siccd <= 3711) |
+                      (siccd >= 3714 & siccd <= 3714) |
+                      (siccd >= 3716 & siccd <= 3716) |
+                      (siccd >= 3750 & siccd <= 3751) |
+                      (siccd >= 3792 & siccd <= 3792) |
+                      (siccd >= 3900 & siccd <= 3939) |
+                      (siccd >= 3990 & siccd <= 3999) ) {
+            return("ConsumerDurable")
+          } else if ( (siccd >= 2520 & siccd <= 2589) |
+                      (siccd >= 2600 & siccd <= 2699) |
+                      (siccd >= 2750 & siccd <= 2769) |
+                      (siccd >= 3000 & siccd <= 3099) |
+                      (siccd >= 3200 & siccd <= 3569) |
+                      (siccd >= 3580 & siccd <= 3629) |
+                      (siccd >= 3700 & siccd <= 3709) |
+                      (siccd >= 3712 & siccd <= 3713) |
+                      (siccd >= 3715 & siccd <= 3715) |
+                      (siccd >= 3717 & siccd <= 3749) |
+                      (siccd >= 3752 & siccd <= 3791) |
+                      (siccd >= 3793 & siccd <= 3799) |
+                      (siccd >= 3830 & siccd <= 3839) |
+                      (siccd >= 3860 & siccd <= 3899) ) {
+            return("Manufacturing")
+          } else if ( (siccd >= 1200 & siccd <= 1399) |
+                      (siccd >= 2900 & siccd <= 2999) ) {
+            return("Energy")
+          } else if ( (siccd >= 2800 & siccd <= 2829) |
+                      (siccd >= 2840 & siccd <= 2899) ) {
+            return("Chemicals")
+          } else if ( (siccd >= 3570 & siccd <= 3579) |
+                      (siccd >= 3660 & siccd <= 3692) |
+                      (siccd >= 3694 & siccd <= 3699) |
+                      (siccd >= 3810 & siccd <= 3829) |
+                      (siccd >= 7370 & siccd <= 7379) ) {
+            return("BusinessEquipment")
+          } else if ( (siccd >= 4800 & siccd <= 4899) ) {
+            return("Telecom")
+          } else if ( (siccd >= 4900 & siccd <= 4949) ) {
+            return("Utilities")
+          } else if ( (siccd >= 5000 & siccd <= 5999) |
+                      (siccd >= 7200 & siccd <= 7299) |
+                      (siccd >= 7600 & siccd <= 7699) ) {
+            return("Retail")
+          } else if ( (siccd >= 2830 & siccd <= 2839) |
+                      (siccd >= 3693 & siccd <= 3693) |
+                      (siccd >= 3840 & siccd <= 3859) |
+                      (siccd >= 8000 & siccd <= 8099) ) {
+            return("Health")
+          } else if ( (siccd >= 6000 & siccd <= 6999) ) {
+            return("Finance")
+          } else {
+            return("Other")
+          }
+      }
+      A[, sector12 := SetSector(siccd), by = permno]
+      return(A)
+  }</code></pre>
+
+  <p>This function seems to be a little bit too long right? Do not worry too much about it. The only thing we added here is a local function <code class="language-r">SetSector</code>, which you do not need to devote too much of your thoughts. Based on what we have done, calculate the sector weights. This should be an easy exercise.</p>
+  <code class="language-r"></code>
+  <pre><code class="language-r">sector_weights <- crsp_merged[, lapply(.SD, sum),
+                                .SDcols = "dynamic_weight",
+                                by = .(year, month, sector12)]
+  setnames(sector_weights, "dynamic_weight", "sector_weight")</code></pre>
+
+  \underline{Successfully give sector not sure about the sector weight.}
+
+  <h3 id="turnover" class="anchored">Turnover</h3>
+  <p>Here I will demonstrate how to calculate the two-way turnover. Here are the steps:</p>
+
+  <ul>
+    <li>Calculate dynamic weights that are drifted by price return and lag them 1 month. These are the weights right before turning over the portfolio at the beginning of the month.</li>
+    <li>Normalize these weights to 100%.</li>
+    <li>Merge them back into the regular dynamic weights.</li>
+    <li>Set missing values of dynamic weights and lagged price-drifted dynamic weights to 0. Calculate the absolute value of the difference between the dynamic weights and lagged price-drifted dynamic weights. This is the individual stock turnover.</li>
+    <li>Sum the individual stock turnover in each year and month. This is the portfolio turnover.</li>
+  </ul>
+
+  \underline{Have to skip not sure about the \code{SAS} codes, very confusing}
+
+  {\Large\bfseries Performance Table}
+
+  {\Large\bfseries Calculations}
+
+  First, got to the Kenneth R. French Data Library and download the Fama French market risk premium, value factor, size factor, and risk-free rate. Unzip the file and put the ``txt'' file into our working directory. Read in data.
+</div>

@@ -1,6 +1,4 @@
 /* My Own specify */
-
-
 /* General */
 
 /*        Navigation Bar        */
@@ -278,6 +276,9 @@
 .panel .container p {
   font-size: 14px;
   color: black;
+}
+.panel .container .col-md-9 {
+  border-left: 1px solid #f0f2f1;
 }
 
 /* news section*/
@@ -676,7 +677,6 @@ footer.author {
     text-align: center;
 }
 
-
 /* side bar*/
 
 #sidebar.affix {
@@ -684,7 +684,6 @@ footer.author {
 }
 /* sidebar */
 .docs-sidebar {
-  border-right: 1px solid #f0f2f1;
   padding-left: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
