@@ -7,13 +7,12 @@ permalink: /project/
 <div class="col-md-3" role="complementary">
   <nav class="docs-sidebar">
     <ul class="nav" id="sidebar">
-      <li><a href="#ESG">Economic Scenario Generator</a>
-        <ul class="nav">
-          <li><a href="#advisors">Advisors</a></li>
-          <li><a href="#collaborators">Collaborators</a></li>
-          <li><a href="#intro">Introduction</a></li>
-        </ul>
-      </li>
+      <li><a href="#ESG">Economic Scenario Generator</a></li>
+      <li><a href="#advisors">Advisors</a></li>
+      <li><a href="#collaborators">Collaborators</a></li>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#term-structure-model">Term Structure Models</a></li>
+      <li><a href="#results">Results</a></li>
       <li><a href="#top">Back to top</a></li>
     </ul>
   </nav>
@@ -49,4 +48,42 @@ permalink: /project/
     <p>This project targets at proposing and developing best-in-class multi-asset class ESG models in the U.S. and Singapore economies, taking into account their unique characteristics and practical limitations of local capital markets. In general there are two scenario “frameworks”: Risk Neutral (RN), and Real World (RW) scenarios. Risk Neutral (RN) scenarios are consis- tent with the theory underlying the Black-Scholes valuation and are more suited for a “point in time” valuation of options and guarantees (embedded in both assets and liabilities). Real World (RW) scenarios reflect the risk premium and may embed an investor’s own ‘world view’, with more structure built into how different assets evolve “realistically” over time, and are therefore more suited for longer term risk and capital projections.</p>
     <p>In this project, we aim to develop the ESG model nested in RN framework across several assets classes, as we employ arbitrage-free approach to model the term structure also for other assets. RN approaches are preferable to the RW ones, because they are based on arbitrage free assumptions and market consistent. Although there are some limitations as we discussed above, this framework should be developed for handling these limitations and identifying the potential weaknesses of the calibrated models. The end product will be reviewed and considered when constructing our optimization engine for strategic and tactical asset allocation.</p>
   </div>
+  <h2 id="term-structure-model" class="anchored">Term Structure Models</h2>
+  As a starting point, our project calibrate and estimate the following models: 
+  <ul>
+    <li>Independent DNS (I-DNS) model</li>
+    <li>Independent AFNS (I-AFNS) model</li>
+    <li>Correlated AFNS (C-AFNS) model</li>
+  </ul>
+  <h2 id="results" class="anchored">Results</h2>
+  <figure>
+    <img src="{{ "/assets/img/proj/esg/1.svg" | prepend: baseurl }}" style="width: 100%;">
+    <figcaption>Fig1. - Daily Mean Yield Curve.</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ "/assets/img/proj/esg/2.svg" | prepend: baseurl }}" style="width: 100%;">
+    <figcaption>Fig2. - AFNS Yield Adjusted Term.</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ "/assets/img/proj/esg/3.svg" | prepend: baseurl }}" style="width: 100%;">
+    <figcaption>Fig3. - Independent AFNS U.S. Mean 1-Month Ahead Forecast Curve.</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ "/assets/img/proj/esg/4.svg" | prepend: baseurl }}" style="width: 100%;">
+    <figcaption>Fig4. - Correlated AFNS U.S. Mean 1-Month Ahead Forecast Curve.</figcaption>
+  </figure>
+    
+    
+    
+    
+  
+
+  
 </div>
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}  
+  });
+  </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

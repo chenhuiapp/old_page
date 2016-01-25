@@ -7,6 +7,12 @@ permalink: /book/chap1.html
   <nav class="docs-sidebar">
     <ul class="nav" id="sidebar">
       <li><a href="#Chapter-1">Chapter 1</a></li>
+      <li><a href="#download-crsp-data">Downloading and Using CRSP Data</a>
+        <ul class="nav">
+          <li><a href="#why-crsp">Why CRSP?</a></li>
+          <li><a href="#using-wrds">Using WRDS to Download CRSP Data</a></li>
+        </ul>
+      </li>
       <li><a href="#ew-port">Creating Equally-Weighted Portfolios</a></li>
       <li><a href="#cw-port">Creating Capitalization-Weighted Portfolios</a></li>
       <li><a href="#rebalance">Varying Rebalance Frequency</a></li>
@@ -22,6 +28,71 @@ permalink: /book/chap1.html
 </div>
 <div class="col-md-9" role="main-doc">
   <h1 id="Chapter-1" class="Page-header anchored">Chapter 1</h1>
+  <p>Before we build complicated strategies, we need to build the basic tools of portfolio construction. In this chapter, we will walk you through how to download monthly returns data from Wharton Research Data Services (WRDS, pronounced “words”), which your university should have access to. Then, we will perform some simple data plots and calculate some basic statistics to understand the nature of individual stock returns. We will proceed to construct capitalization-weighted and equally weighted portfolios and their returns. Finally, we will create performance tables to see how these simple portfolios have performed.</p>
+
+  <h2 id="download-crsp-data" class="anchored">Downloading and Using CRSP Data</h2>
+  <h3 id="why-crsp" class="anchored">Why CRSP?</h3>
+  <p>We will show you how to download stock returns data from the United States from the Center for Research in Security Prices or (CRSP, pronounced “crisp”).  Before that, we should discuss why we are using CRSP and not Yahoo! Finance, Google Finance, or Bloomberg. The most critical reason is survivorship bias. That is, companies that go bankrupt will be removed from Yahoo! Finance, Google Finance, or Bloomberg. Try finding Worldcom (ticker: WCOM) on Yahoo! Finance. You won’t be able to find it, because it was delisted in 2002. On CRSP, you will find Worldcom data up until it was delisted.</p>
+  <p>Survivorship bias is a problem because you only see the firms that did not delist whether because of bankruptcy, being bought out, or not meeting the requirements of the exchange on which it is listed. On average, stocks that delisted underperformed those that did not, but we cannot know for certain which stocks will delist. Computing portfolio returns using only stocks that never delisted will exaggerate the returns that one could plausibly earn. If we want to compute the 10 year return of the top 500 stocks by market capitalization in the year 2000, and we only included stocks that existed in 2010, we would exclude Worldcom, Enron, and Lehman Brothers, but in the year 2000, we can’t expect our portfolio to magically know about these future delistings.</p>
+  <p>Luckily, CRSP, Datastream, and other data providers will have data free of survivorship bias. You will find all of your favorite delisted companies and a corresponding delisting return, which we will discuss at length later in this chapter.</p>
+  <h3 id="using-wrds">Using WRDS to Download CRSP Data</h3>
+  <p>Login to WRDS. You will see a list of subscriptions, one of which should be CRSP. Feel free to dig through the datasets that you have access to. There is a multitude of interesting information contained in WRDS. For now, though, click on CRSP.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic1.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Click on Stock / Security Files under Annual Update, though if you have access to quarterly or monthly updated data, feel free to use that instead.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic2.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Now, click on “Monthly Stock File.” Generally monthly data is a bit easier to work with, so we will stick to that for now. However, we will also download daily data for the computation of volatility and beta, for which it is far more valuable. Also, we will use volatility and standard deviation interchangeably.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic3.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>If you haven’t used CRSP before, the next page will look extremely intimidating as it did to all of us when we first looked at the page. In short, it is a large list of returns, price, and identification data that you may be interested in. Note that financial data is missing from this list. Financials data comes from Compustat. We will download financial data from Compustat later in the chapter. First, we will choose our start and end date. We want as much data as possible, so let’s leave the end date as is and change the start date to December 1925.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic4.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Step 2 asks how we would like to search the dataset. We want to search the entire database, so skip the question about formatting our company codes and click on “Search the Entire Database.”</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic5.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>The conditional statements below are optional but we do want to set a restriction with respect to Share Codes. We only want common shares—not deposit receipts or certificates. Set the first drop-down box to shrcd. Set the second to "=" and the third to 10. Do the same for the second row except set the third column to 11. Share codes of 10 and 11 are common shares of stocks. Last, but certainly not least, select the "OR" radio button, not the "AND" one!</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic6.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Now, we select identifiers. We are going to choose several. CUSIP and ticker may help us merge with other databases down the road. Note a company’s CUSIP or ticker may change.  The CRSP permanent company number (PERMCO) is unique to each company. Note that the CRSP permanent issue identifier (PERMNO) will already be included in the download and is unique to each security. Some companies have multiple securities to a PERMCO can have multiple PERMNOs but a PERMNO can only have one associated PERMCO. Next, we need the Exchange Code for reasons that we will discuss later. In short, NYSE stocks are on average higher market cap than AMEX and NASDAQ stocks and therefore have slightly different characteristics. Lastly, we want the SIC code which we will use to classify sectors.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic7.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>For time series, information, we want price, closing bid, closing ask, share volume, holding period return, and holding period return without dividends. Holding period return is total return (including dividends) while holding period return without dividends is price return (only the capital gains component of return). To further clarify, total return is the return you would earn if you continuously reinvested your dividends into a stock. Price return is the return you would earn if you completely ignore dividends. We will use closing bid, closing ask, and share volume for liquidity purposes later. We will use price for calculating market capitalization.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic8.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Now, we need shares outstanding since it’s the second piece of the formula for market capitalization.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic9.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Next we need delisting returns. Delisting returns are returns that are earned from delisting. For example, if a $1 stock is delisted when another firm buys it for $1.10 per share, the delisting return will be 10%. If a $10 stock delists because it went bankrupt and its equity holders were completely wiped out, its delisting return would be -100%. We need to choose both the delisting return for total return and delisting return without dividends for price return.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic10.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>In distribution information, we need dividend cash amount, cumulative factor to adjust price, and cumulative factor to adjust shares. We will use dividend cash amount, which is dividends per share, to calculate total returns adjusted for bid-ask spread. The cumulative factors to adjust price and shares exist due to stock splits. Imagine I have a stock that sells for $4 a share that splits into 2 $2 shares. If I naively compute price returns, I would erroneously say that I had lost 50% of my value, when in fact, it’s more meaningful to halve all previous prices and double all previous shares, so that price returns can be calculated accurately.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic11.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>We are done with data items. Now, we just need to set our data format. We will be using <code>R</code>, so choose comma-delimited text. You can choose to compress or not based on the speed of your Internet connection. The default date format is fine. You could also click the "Save this query to myWRDS" button, so that next time your search can be based on this query. Finally, click on the submit query button and wait a few moments for the data to finish loading.</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic12.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Once your data has finished loading, you should see this:</p>
+  <figure>
+    <img src="{{ "/assets/img/R/chap1/pic13.png" | prepend: baseurl }}" style="width: 100%">
+  </figure>
+  <p>Save the file and unzip it if necessary. Rename the .csv data file to something meaningful like “crsp_monthly_raw.csv.” We will save it and read it from a folder called "~/Data" but feel free to place it anywhere.</p>
+  <p>Now, do exactly the same thing for daily data. We will use this for calculating volatility and beta. This file is truly huge—about 13.8 GB—and will take a longer time to run. If you do not have the hard drive space to store it, skip it. You can calculate a half-decent volatility or beta estimate using monthly data. While you wait for the data to run, continue with the following sections, which use only monthly data.</p>
+
+
+
 
   <p>Under Mac OS X environment, open RStudio, you should see something like this.</p>
 
