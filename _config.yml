@@ -7,7 +7,7 @@
 
 # Site settings
 exclude: [jekyll.sublime-project, jekyll.sublime-workspace, README.md] # files to exclude
-highlighter: pygments
+rouge: pygments
 markdown: kramdown
 
 defaults:
