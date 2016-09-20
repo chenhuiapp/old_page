@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Shakespeare
-categories: [blog, reading, featured]
-tags: [cs61a, 1.1, shakespeare]
+title: Time to Blog Again
+categories: [blog, featured]
+tags: [blog]
 fullview: false
 comments: true
 ---

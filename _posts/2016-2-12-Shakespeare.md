@@ -2,7 +2,7 @@
 layout: post
 title: Shakespeare
 categories: [blog, reading, featured]
-tags: [cs61a, 1.1, shakespeare]
+tags: [shakespeare]
 fullview: false
 comments: true
 ---
