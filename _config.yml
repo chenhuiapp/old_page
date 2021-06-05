@@ -1,0 +1,35 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+exclude: [jekyll.sublime-project, jekyll.sublime-workspace, README.md] # files to exclude
+rouge: pygments
+markdown: kramdown
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: Michael Wang
+
+description: > # this means to ignore newlines until "baseurl:"
+  This is my homepage
+author: Michael Wang
+name: Homepage
+email: cwang.michael.23@gmail.com
+url: "http://morningfin.github.io" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+github_username:  morningfin
+linkedin: Chenhui Wang
+bio: I am a new MFE graduate.
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+
+BASE_PATH:
