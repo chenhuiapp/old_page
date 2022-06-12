@@ -15,6 +15,8 @@ About 10 months ago, right before my graudation from Anderson[http://www.anderso
 
 This is a very interesting result. Since I am now working on China's A-share market, I am wondering whether this method would also work in the a market that is not as efficient as U.S. 
 
+{% include figure.html %}
+
 
 [jekyll]:      http://jekyllrb.com
 [jekyll-gh]:   https://github.com/jekyll/jekyll
