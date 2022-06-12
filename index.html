@@ -1,5 +1,6 @@
 ---
 layout: default
+root: "./"
 ---
 
 <!-- Section News -->
@@ -277,15 +278,15 @@ private:
             <pre class="line-numbers"><code class="language-python">#!/usr/bin/python
 
 class ResearchInterests:
-"""My Personal Research Interests"""
-interest_count = 0
+    """My Personal Research Interests"""
+    interest_count = 0
 
-def __int__(self, interest):
-  self.interest = interest
-  ResearchInterests.interest_count += 1
+    def __int__(self, interest):
+      self.interest = interest
+      ResearchInterests.interest_count += 1
 
-def displayCount(self):
-  print "Total Research Interests Field %d" % ResearchInterests.interest_count
+    def displayCount(self):
+      print "Total Research Interests Field %d" % ResearchInterests.interest_count
 
 
 

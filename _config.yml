@@ -15,18 +15,18 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: Michael Wang
+      title: Chenhui Wang
 
 description: > # this means to ignore newlines until "baseurl:"
   This is my homepage
-author: Michael Wang
+author: Chenhui Wang
 name: Homepage
 email: cwang.michael.23@gmail.com
 url: "http://morningfin.github.io" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. /blog
 github_username:  morningfin
 linkedin: Chenhui Wang
-bio: I am a new MFE graduate.
+bio: I am a incoming 2019 UCLA Statistics PhD Student.
 
 rss_path: feed.xml
 categories_path: categories.html
